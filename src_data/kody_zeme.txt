@@ -1,0 +1,16 @@
+at Rakousko
+ca Kanada
+ch Švýcarsko
+cz Česko
+de Německo
+dk Dánsko 
+fi Finsko
+fr Francie
+gb Velká Británie
+it Itálie
+lv Lotyšsko
+no Norsko
+ru Rusko
+se Švédsko
+sk Slovensko
+us USA
