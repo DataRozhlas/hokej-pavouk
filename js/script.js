@@ -9,7 +9,7 @@ const QuarterSelect = ({
   quarterPool,
   selection,
 }) => (
-  <select value={selection[position]} defaultValue="0" onChange={e => handler(e, position)}>
+  <select value={selection[position]} onChange={e => handler(e, position)}>
     <option disabled value={0}> -- vyberte tým-- </option>
     {quarterPool.map(el => (selection.includes(el)
       ? <option key={el} value={el} disabled>{codeToName(el)}</option>
@@ -23,7 +23,11 @@ const FilterSelect = ({
   selection,
   pickStart,
 }) => (
-  <select value={selection[position]} defaultValue="0" onChange={e => handler(e, position)}>
+  <select
+    value={selection[position]}
+    onChange={e => handler(e, position)}
+    disabled={selection.slice(pickStart, pickStart + 2).every(el => el !== 0) ? null : true}
+  >
     <option disabled key={0} value={0}> -- vyberte tým-- </option>
     {selection
       .slice(pickStart, pickStart + 2)
@@ -36,7 +40,11 @@ const ThirdPlaceSelect = ({
   handler,
   selection,
 }) => (
-  <select value={selection[15]} defaultValue="0" onChange={e => handler(e, 15, true)}>
+  <select
+    value={selection[15]}
+    onChange={e => handler(e, 15, true)}
+    disabled={selection.slice(12, 14).every(el => el !== 0) ? null : true}
+  >
     <option disabled value={0}> -- vyberte tým-- </option>
     {selection
       .slice(8, 12)
@@ -63,7 +71,7 @@ class HokejApp extends Component {
     horní kastlík áčko, spodní kastlík béčko
     */
     this.state = {
-      selection: new Array(17),
+      selection: new Array(17).fill(0),
       quarterPool: {
         1: ["dk", "fi", "fr", "ca", "de", "sk", "us", "gb"],
         2: ["at", "ch", "cz", "it", "lv", "no", "ru", "se"],
@@ -82,7 +90,7 @@ class HokejApp extends Component {
     else if (position === 6 || position === 7) selection[11] = 0;
     else if (position === 8 || position === 9) selection[12] = 0;
     else if (position === 10 || position === 11) selection[13] = 0;
-    
+
     if (position < 4) selection[12] = 0;
     if (position >= 4 && position < 8) selection[13] = 0;
 
