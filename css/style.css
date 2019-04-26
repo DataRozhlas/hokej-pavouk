@@ -1,3 +1,7 @@
 .hokejFlex {
   display: flex;
 }
+
+input:invalid {
+  background-color: pink;
+}

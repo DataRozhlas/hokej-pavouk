@@ -76,9 +76,13 @@ class HokejApp extends Component {
         1: ["dk", "fi", "fr", "ca", "de", "sk", "us", "gb"],
         2: ["at", "ch", "cz", "it", "lv", "no", "ru", "se"],
       },
+      email: "()",
+      shareLink: undefined,
     };
 
     this.handleSelection = this.handleSelection.bind(this);
+    this.sendForm = this.sendForm.bind(this);
+    this.FbShare = this.FbShare.bind(this);
   }
 
   handleSelection(e, position, thirdPlace = false) {
@@ -100,12 +104,38 @@ class HokejApp extends Component {
       selection[16] = 0;
     }
 
-    if (thirdPlace) selection[16] = selection.slice(8, 12).filter(el => !selection.slice(13, 15).includes(el) && selection[15] !== el);
+    // eslint-disable-next-line prefer-destructuring
+    if (thirdPlace) selection[16] = selection.slice(8, 12).filter(el => !selection.slice(13, 15).includes(el) && selection[15] !== el)[0];
     this.setState({ selection, quarterPool });
   }
 
+  handleEmail(e) {
+    this.setState({ email: e.target.value });
+  }
+
+  sendForm() {
+    const { selection, email } = this.state;
+    // voheky
+    const correctedSelection = selection.slice(0, 14);
+    correctedSelection.push(selection[15], selection[16], selection[14], email);
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://jq0d6e5rs6.execute-api.eu-west-1.amazonaws.com/prod");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        this.setState({ shareLink: JSON.parse(xhr.responseText) });
+      }
+    };
+    xhr.send(JSON.stringify(correctedSelection));
+  }
+
+  FbShare() {
+    const { shareLink } = this.state;
+    console.log(shareLink);
+  }
+
   render() {
-    const { quarterPool, selection } = this.state;
+    const { quarterPool, selection, shareLink } = this.state;
     return (
       <div>
         {`Tohle jsou možnosti! ${selection}`}
@@ -181,6 +211,16 @@ class HokejApp extends Component {
               <ThirdPlaceSelect handler={this.handleSelection} selection={selection} />
             </form>
           </div>
+        </div>
+        <div className="email">
+          {"Zadejte e-mailovou adresu (nepovinné, GDPR):"}
+          <form>
+            <input type="email" onChange={e => this.handleEmail(e)} />
+          </form>
+        </div>
+        <div className="submit">
+          <input type="submit" value="Odeslat" disabled={selection.every(el => el !== 0) ? null : true} onClick={this.sendForm} />
+          <input type="submit" value="Sdílej na FB" onClick={this.FbShare} disabled={shareLink ? null : true} />
         </div>
       </div>
     );
