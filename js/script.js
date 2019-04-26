@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import { codeToName } from "./helperFunctions";
+import "core-js/features/array/includes";
 
 const QuarterSelect = ({
   handler,
