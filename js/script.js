@@ -71,7 +71,26 @@ class HokejApp extends Component {
     horní kastlík áčko, spodní kastlík béčko
     */
     this.state = {
-      selection: new Array(17).fill(0),
+      // selection: new Array(17).fill(0),
+      selection: [
+        "dk",
+        "at",
+        "fi",
+        "ch",
+        "fr",
+        "cz",
+        "ca",
+        "it",
+        "dk",
+        "fi",
+        "fr",
+        "ca",
+        "dk",
+        "fr",
+        "dk",
+        "fi",
+        "ca",
+      ],
       quarterPool: {
         1: ["dk", "fi", "fr", "ca", "de", "sk", "us", "gb"],
         2: ["at", "ch", "cz", "it", "lv", "no", "ru", "se"],
@@ -83,6 +102,7 @@ class HokejApp extends Component {
     this.handleSelection = this.handleSelection.bind(this);
     this.sendForm = this.sendForm.bind(this);
     this.FbShare = this.FbShare.bind(this);
+    this.TwShare = this.TwShare.bind(this);
   }
 
   handleSelection(e, position, thirdPlace = false) {
@@ -115,6 +135,7 @@ class HokejApp extends Component {
 
   sendForm() {
     const { selection, email } = this.state;
+    console.log(selection);
     // voheky
     const correctedSelection = selection.slice(0, 14);
     correctedSelection.push(selection[15], selection[16], selection[14], email);
@@ -131,7 +152,12 @@ class HokejApp extends Component {
 
   FbShare() {
     const { shareLink } = this.state;
-    console.log(shareLink);
+    window.open(`${`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`}`, "Sdílení", "width=550,height=450,scrollbars=no");
+  }
+
+  TwShare() {
+    const { shareLink } = this.state;
+    window.open(`${`https://twitter.com/share?url=${shareLink}`}`, "Sdílení", "width=550,height=450,scrollbars=no");
   }
 
   render() {
@@ -221,6 +247,7 @@ class HokejApp extends Component {
         <div className="submit">
           <input type="submit" value="Odeslat" disabled={selection.every(el => el !== 0) ? null : true} onClick={this.sendForm} />
           <input type="submit" value="Sdílej na FB" onClick={this.FbShare} disabled={shareLink ? null : true} />
+          <input type="submit" value="Sdílej na TW" onClick={this.TwShare} disabled={shareLink ? null : true} />
         </div>
       </div>
     );
