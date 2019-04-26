@@ -24,8 +24,11 @@ const FilterSelect = ({
   pickStart,
 }) => (
   <select value={selection[position]} defaultValue="0" onChange={e => handler(e, position)}>
-    <option disabled value={0}> -- vyberte tým-- </option>
-    {selection.slice(pickStart, pickStart + 2).map(el => <option key={el} value={el}>{codeToName(el)}</option>)}
+    <option disabled key={0} value={0}> -- vyberte tým-- </option>
+    {selection
+      .slice(pickStart, pickStart + 2)
+      .filter(el => el !== 0)
+      .map(el => <option key={el} value={el}>{codeToName(el)}</option>)}
   </select>
 );
 
@@ -37,7 +40,8 @@ const ThirdPlaceSelect = ({
     <option disabled value={0}> -- vyberte tým-- </option>
     {selection
       .slice(8, 12)
-      .filter(el => !selection.slice(13, 15).includes(el))
+      .filter(el => !selection.slice(12, 14).includes(el))
+      .filter(el => el !== 0)
       .map(el => <option key={el} value={el}>{codeToName(el)}</option>)}
   </select>
 );
@@ -52,6 +56,7 @@ class HokejApp extends Component {
     13-14: finals - 13(from 9+10),14(from11+12)
     15: winner (from 13+14)
     16: third place winner (from loser of semis)
+    17: third place loser
 
     first select all quarters
 
@@ -71,14 +76,28 @@ class HokejApp extends Component {
   handleSelection(e, position, thirdPlace = false) {
     const { selection, quarterPool } = this.state;
     selection[position] = e.target.value;
+    if (position < 2) selection[8] = 0;
+    else if (position === 2 || position === 3) selection[9] = 0;
+    else if (position === 4 || position === 5) selection[10] = 0;
+    else if (position === 6 || position === 7) selection[11] = 0;
+    else if (position === 8 || position === 9) selection[12] = 0;
+    else if (position === 10 || position === 11) selection[13] = 0;
+    
+    if (position < 4) selection[12] = 0;
+    if (position >= 4 && position < 8) selection[13] = 0;
+
+    if (position <= 13) {
+      selection[14] = 0;
+      selection[15] = 0;
+      selection[16] = 0;
+    }
+
     if (thirdPlace) selection[16] = selection.slice(8, 12).filter(el => !selection.slice(13, 15).includes(el) && selection[15] !== el);
-    console.log(quarterPool);
     this.setState({ selection, quarterPool });
   }
 
   render() {
     const { quarterPool, selection } = this.state;
-    console.log(selection);
     return (
       <div>
         {`Tohle jsou možnosti! ${selection}`}
