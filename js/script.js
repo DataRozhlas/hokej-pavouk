@@ -256,8 +256,8 @@ class HokejApp extends Component {
             )
             : (
               <span>
-                <button type="submit" onClick={this.FbShare} disabled={shareLink ? null : true}>Sdílej na FB</button>
-                <button type="submit" onClick={this.TwShare} disabled={shareLink ? null : true}>Sdílej na TW</button>
+                <a href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`} target="_blank" rel="noopener noreferrer"><button type="submit" disabled={shareLink ? null : true}>Sdílej na FB</button></a>
+                <a href={`https://twitter.com/share?url=${shareLink}`} target="_blank" rel="noopener noreferrer"><button type="submit" disabled={shareLink ? null : true}>Sdílej na TW</button></a>
               </span>
             )}
         </div>
