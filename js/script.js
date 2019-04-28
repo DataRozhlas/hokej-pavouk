@@ -93,8 +93,8 @@ class HokejApp extends Component {
         "ca",
       ],
       quarterPool: {
-        1: ["dk", "fi", "fr", "ca", "de", "sk", "us", "gb"],
-        2: ["at", "ch", "cz", "it", "lv", "no", "ru", "se"],
+        1: ["ca", "us", "fi", "de", "sk", "dk", "fr", "gb"],
+        2: ["se", "ru", "cz", "ch", "no", "lv", "at", "it"],
       },
       email: "()",
       shareLink: undefined,
