@@ -246,9 +246,20 @@ class HokejApp extends Component {
           </form>
         </div>
         <div className="submit">
-          <input type="submit" value="Odeslat" disabled={selection.every(el => el !== 0) ? null : true} onClick={this.sendForm} />
-          <input type="submit" value="Sdílej na FB" onClick={this.FbShare} disabled={shareLink ? null : true} />
-          <input type="submit" value="Sdílej na TW" onClick={this.TwShare} disabled={shareLink ? null : true} />
+          <button type="submit" disabled={selection.every(el => el !== 0) ? null : true} onClick={this.sendForm}>Odeslat</button>
+          {window.innerWidth > 600
+            ? (
+              <span>
+                <button type="submit" onClick={this.FbShare} disabled={shareLink ? null : true}>Sdílej na FB</button>
+                <button type="submit" onClick={this.TwShare} disabled={shareLink ? null : true}>Sdílej na TW</button>
+              </span>
+            )
+            : (
+              <span>
+                <button type="submit" onClick={this.FbShare} disabled={shareLink ? null : true}>Sdílej na FB</button>
+                <button type="submit" onClick={this.TwShare} disabled={shareLink ? null : true}>Sdílej na TW</button>
+              </span>
+            )}
         </div>
       </div>
     );
