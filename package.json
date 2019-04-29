@@ -30,6 +30,7 @@
     "react-app-polyfill": "^1.0.0",
     "react-dom": "^16.8.6",
     "react-select": "^2.4.3",
+    "react-spinners": "^0.5.4",
     "webpack": "^4.29.6"
   },
   "devDependencies": {

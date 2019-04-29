@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import Select, { components } from "react-select";
+import { ClipLoader } from "react-spinners";
 import { codeToName } from "./helperFunctions";
 import "core-js/features/array/includes";
 
@@ -32,6 +33,7 @@ const QuarterSelect = ({
   position,
   quarterPool,
   selection,
+  disabled,
 }) => {
   const options = quarterPool.map(el => (selection.includes(el)
     ? { value: el, isDisabled: true, label: codeToName(el) }
@@ -48,6 +50,7 @@ const QuarterSelect = ({
       onChange={val => handler(val.value, position)}
       placeholder="-- vyberte tým --"
       isSearchable={false}
+      isDisabled={disabled && true}
       components={{ SingleValue, Option }}
     />
   );
@@ -58,6 +61,7 @@ const FilterSelect = ({
   position,
   selection,
   pickStart,
+  disabled,
 }) => {
   const options = selection
     .slice(pickStart, pickStart + 2)
@@ -74,7 +78,7 @@ const FilterSelect = ({
       onChange={val => handler(val.value, position)}
       placeholder="-- vyberte tým --"
       isSearchable={false}
-      isDisabled={selection.slice(pickStart, pickStart + 2).every(el => el !== 0) ? null : true}
+      isDisabled={selection.slice(pickStart, pickStart + 2).every(el => el !== 0) && !disabled ? null : true}
       components={{ SingleValue, Option }}
     />
   );
@@ -83,6 +87,7 @@ const FilterSelect = ({
 const ThirdPlaceSelect = ({
   handler,
   selection,
+  disabled,
 }) => {
   const options = selection
     .slice(8, 12)
@@ -100,7 +105,7 @@ const ThirdPlaceSelect = ({
       onChange={val => handler(val.value, 15, true)}
       placeholder="-- vyberte tým --"
       isSearchable={false}
-      isDisabled={selection.slice(12, 14).every(el => el !== 0) ? null : true}
+      isDisabled={selection.slice(12, 14).every(el => el !== 0) && !disabled ? null : true}
       components={{ SingleValue, Option }}
     />
   );
@@ -124,13 +129,12 @@ class HokejApp extends Component {
     */
     this.state = {
       selection: new Array(17).fill(0),
-      // selection: ["dk", "at", "fi", "ch", "fr", "cz", "ca", "it",
-      //  "dk", "fi", "fr", "ca", "dk", "fr", "dk", "fi", "ca"],
       quarterPool: {
         1: ["ca", "us", "fi", "de", "sk", "dk", "fr", "gb"],
         2: ["se", "ru", "cz", "ch", "no", "lv", "at", "it"],
       },
       shareLink: undefined,
+      loading: false,
     };
 
     this.handleSelection = this.handleSelection.bind(this);
@@ -174,6 +178,7 @@ class HokejApp extends Component {
 
   sendForm() {
     const { selection } = this.state;
+    this.setState({ loading: true });
     // voheky
     const correctedSelection = selection.slice(0, 14);
     correctedSelection.push(selection[15], selection[16], selection[14], "()");
@@ -182,7 +187,10 @@ class HokejApp extends Component {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = () => {
       if (xhr.status === 200) {
-        this.setState({ shareLink: JSON.parse(xhr.responseText) });
+        this.setState({
+          shareLink: JSON.parse(xhr.responseText),
+          loading: false,
+        });
       }
     };
     xhr.send(JSON.stringify(correctedSelection));
@@ -199,45 +207,55 @@ class HokejApp extends Component {
   }
 
   render() {
-    const { quarterPool, selection, shareLink } = this.state;
+    const {
+      quarterPool, selection, shareLink, loading,
+    } = this.state;
     return (
       <div>
         <div className="hokej-container">
           <span className="hokej-desc-q">Čtvrtfinále</span>
-          <QuarterSelect handler={this.handleSelection} position={0} quarterPool={quarterPool[1]} selection={selection} />
-          <QuarterSelect handler={this.handleSelection} position={1} quarterPool={quarterPool[2]} selection={selection} />
+          <QuarterSelect handler={this.handleSelection} position={0} quarterPool={quarterPool[1]} selection={selection} disabled={shareLink} />
+          <QuarterSelect handler={this.handleSelection} position={1} quarterPool={quarterPool[2]} selection={selection} disabled={shareLink} />
           <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket1.png" className="hokej-bracket-1" alt="" />
-          <QuarterSelect handler={this.handleSelection} position={2} quarterPool={quarterPool[1]} selection={selection} />
-          <QuarterSelect handler={this.handleSelection} position={3} quarterPool={quarterPool[2]} selection={selection} />
+          <QuarterSelect handler={this.handleSelection} position={2} quarterPool={quarterPool[1]} selection={selection} disabled={shareLink} />
+          <QuarterSelect handler={this.handleSelection} position={3} quarterPool={quarterPool[2]} selection={selection} disabled={shareLink} />
 
-          <QuarterSelect handler={this.handleSelection} position={4} quarterPool={quarterPool[1]} selection={selection} />
-          <QuarterSelect handler={this.handleSelection} position={5} quarterPool={quarterPool[2]} selection={selection} />
+          <QuarterSelect handler={this.handleSelection} position={4} quarterPool={quarterPool[1]} selection={selection} disabled={shareLink} />
+          <QuarterSelect handler={this.handleSelection} position={5} quarterPool={quarterPool[2]} selection={selection} disabled={shareLink} />
           <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket1.png" className="hokej-bracket-2" alt="" />
-          <QuarterSelect handler={this.handleSelection} position={6} quarterPool={quarterPool[1]} selection={selection} />
-          <QuarterSelect handler={this.handleSelection} position={7} quarterPool={quarterPool[2]} selection={selection} />
+          <QuarterSelect handler={this.handleSelection} position={6} quarterPool={quarterPool[1]} selection={selection} disabled={shareLink} />
+          <QuarterSelect handler={this.handleSelection} position={7} quarterPool={quarterPool[2]} selection={selection} disabled={shareLink} />
 
           <span className="hokej-desc-s">Semifinále</span>
-          <FilterSelect handler={this.handleSelection} position={8} pickStart={0} selection={selection} />
-          <FilterSelect handler={this.handleSelection} position={9} pickStart={2} selection={selection} />
+          <FilterSelect handler={this.handleSelection} position={8} pickStart={0} selection={selection} disabled={shareLink} />
+          <FilterSelect handler={this.handleSelection} position={9} pickStart={2} selection={selection} disabled={shareLink} />
           <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket2.png" className="hokej-bracket-3" alt="" />
-          <FilterSelect handler={this.handleSelection} position={10} pickStart={4} selection={selection} />
-          <FilterSelect handler={this.handleSelection} position={11} pickStart={6} selection={selection} />
+          <FilterSelect handler={this.handleSelection} position={10} pickStart={4} selection={selection} disabled={shareLink} />
+          <FilterSelect handler={this.handleSelection} position={11} pickStart={6} selection={selection} disabled={shareLink} />
 
           <span className="hokej-desc-f">Finále</span>
-          <FilterSelect handler={this.handleSelection} position={12} pickStart={8} selection={selection} />
-          <FilterSelect handler={this.handleSelection} position={13} pickStart={10} selection={selection} />
+          <FilterSelect handler={this.handleSelection} position={12} pickStart={8} selection={selection} disabled={shareLink} />
+          <FilterSelect handler={this.handleSelection} position={13} pickStart={10} selection={selection} disabled={shareLink} />
 
           <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket3.png" className="hokej-bracket-4" alt="" />
           <span className="hokej-desc-w">Mistr světa 2019</span>
-          <FilterSelect handler={this.handleSelection} position={14} pickStart={12} selection={selection} />
+          <FilterSelect handler={this.handleSelection} position={14} pickStart={12} selection={selection} disabled={shareLink} />
 
           <span className="hokej-desc-t">Třetí místo</span>
-          <ThirdPlaceSelect handler={this.handleSelection} selection={selection} />
+          <ThirdPlaceSelect handler={this.handleSelection} selection={selection} disabled={shareLink} />
         </div>
         <div className="submit">
           {!shareLink
             ? (
-              <button className="btn btn-primary" type="submit" disabled={selection.every(el => el !== 0) ? null : true} onClick={this.sendForm}>Uložit tip</button>
+              <button className="btn btn-primary" type="submit" disabled={selection.every(el => el !== 0) ? null : true} onClick={this.sendForm}>
+                {!loading && "Uložit tip"}
+                <ClipLoader
+                  sizeUnit="px"
+                  size={20}
+                  color="#ffffff"
+                  loading={loading}
+                />
+              </button>
             ) : (
               <div className="btn btn-green">Tip uložen!</div>
             )}
