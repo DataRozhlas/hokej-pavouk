@@ -29,6 +29,7 @@
     "react": "^16.8.6",
     "react-app-polyfill": "^1.0.0",
     "react-dom": "^16.8.6",
+    "react-select": "^2.4.3",
     "webpack": "^4.29.6"
   },
   "devDependencies": {

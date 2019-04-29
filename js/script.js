@@ -1,65 +1,105 @@
 ﻿/* eslint-disable max-len */
 import React, { Component } from "react";
 import { render } from "react-dom";
+import Select, { components } from "react-select";
 import { codeToName } from "./helperFunctions";
 import "core-js/features/array/includes";
+
+const SingleValue = ({ children, data, ...props }) => (
+  <components.SingleValue {...props}>
+    <img
+      alt={children}
+      src={`https://data.irozhlas.cz/hokej-pavouk/flags/${data.value}.png`}
+    />
+    {children}
+  </components.SingleValue>
+);
+
+const Option = ({ children, data, ...props }) => (
+  <components.Option {...props}>
+    <img
+      alt={children}
+      src={`https://data.irozhlas.cz/hokej-pavouk/flags/${data.value}.png`}
+    />
+    {children}
+  </components.Option>
+);
 
 const QuarterSelect = ({
   handler,
   position,
   quarterPool,
   selection,
-}) => (
-  <select
-    className="hokej-select"
-    value={selection[position]}
-    onChange={e => handler(e, position)}
-  >
-    <option disabled value={0}> -- vyberte tým-- </option>
-    {quarterPool.map(el => (selection.includes(el)
-      ? <option key={el} value={el} disabled>{codeToName(el)}</option>
-      : <option key={el} value={el}>{codeToName(el)}</option>))}
-  </select>
-);
+}) => {
+  const options = quarterPool.map(el => (selection.includes(el)
+    ? { value: el, isDisabled: true, label: codeToName(el) }
+    : { value: el, label: codeToName(el) }
+  ));
+
+  return (
+    <Select
+      options={options}
+      value={selection[position] !== 0
+        ? { value: selection[position], label: codeToName(selection[position]) }
+        : 0}
+      onChange={val => handler(val.value, position)}
+      placeholder="-- vyberte tým --"
+      isSearchable={false}
+      components={{ SingleValue, Option }}
+    />
+  );
+};
 
 const FilterSelect = ({
   handler,
   position,
   selection,
   pickStart,
-}) => (
-  <select
-    className="hokej-select"
-    value={selection[position]}
-    onChange={e => handler(e, position)}
-    disabled={selection.slice(pickStart, pickStart + 2).every(el => el !== 0) ? null : true}
-  >
-    <option disabled key={0} value={0}> -- vyberte tým-- </option>
-    {selection
-      .slice(pickStart, pickStart + 2)
-      .filter(el => el !== 0)
-      .map(el => <option key={el} value={el}>{codeToName(el)}</option>)}
-  </select>
-);
+}) => {
+  const options = selection
+    .slice(pickStart, pickStart + 2)
+    .filter(el => el !== 0)
+    .map(el => ({ value: el, label: codeToName(el) }));
+
+  return (
+    <Select
+      options={options}
+      value={selection[position] !== 0
+        ? { value: selection[position], label: codeToName(selection[position]) }
+        : 0}
+      onChange={val => handler(val.value, position)}
+      placeholder="-- vyberte tým --"
+      isSearchable={false}
+      isDisabled={selection.slice(pickStart, pickStart + 2).every(el => el !== 0) ? null : true}
+      components={{ SingleValue, Option }}
+    />
+  );
+};
 
 const ThirdPlaceSelect = ({
   handler,
   selection,
-}) => (
-  <select
-    className="hokej-select"
-    value={selection[15]}
-    onChange={e => handler(e, 15, true)}
-    disabled={selection.slice(12, 14).every(el => el !== 0) ? null : true}
-  >
-    <option disabled value={0}> -- vyberte tým-- </option>
-    {selection
-      .slice(8, 12)
-      .filter(el => !selection.slice(12, 14).includes(el))
-      .filter(el => el !== 0)
-      .map(el => <option key={el} value={el}>{codeToName(el)}</option>)}
-  </select>
-);
+}) => {
+  const options = selection
+    .slice(8, 12)
+    .filter(el => !selection.slice(12, 14).includes(el))
+    .filter(el => el !== 0)
+    .map(el => ({ value: el, label: codeToName(el) }));
+
+  return (
+    <Select
+      options={options}
+      value={selection[15] !== 0
+        ? { value: selection[15], label: codeToName(selection[15]) }
+        : 0}
+      onChange={val => handler(val.value, 15, true)}
+      placeholder="-- vyberte tým --"
+      isSearchable={false}
+      isDisabled={selection.slice(12, 14).every(el => el !== 0) ? null : true}
+      components={{ SingleValue, Option }}
+    />
+  );
+};
 
 class HokejApp extends Component {
   constructor(props) {
@@ -79,25 +119,8 @@ class HokejApp extends Component {
     */
     this.state = {
       // selection: new Array(17).fill(0),
-      selection: [
-        "dk",
-        "at",
-        "fi",
-        "ch",
-        "fr",
-        "cz",
-        "ca",
-        "it",
-        "dk",
-        "fi",
-        "fr",
-        "ca",
-        "dk",
-        "fr",
-        "dk",
-        "fi",
-        "ca",
-      ],
+      selection: ["dk", "at", "fi", "ch", "fr", "cz", "ca", "it",
+        "dk", "fi", "fr", "ca", "dk", "fr", "dk", "fi", "ca"],
       quarterPool: {
         1: ["ca", "us", "fi", "de", "sk", "dk", "fr", "gb"],
         2: ["se", "ru", "cz", "ch", "no", "lv", "at", "it"],
@@ -112,9 +135,9 @@ class HokejApp extends Component {
     this.TwShare = this.TwShare.bind(this);
   }
 
-  handleSelection(e, position, thirdPlace = false) {
+  handleSelection(value, position, thirdPlace = false) {
     const { selection, quarterPool } = this.state;
-    selection[position] = e.target.value;
+    selection[position] = value;
     if (position < 2) selection[8] = 0;
     else if (position === 2 || position === 3) selection[9] = 0;
     else if (position === 4 || position === 5) selection[10] = 0;
@@ -196,6 +219,7 @@ class HokejApp extends Component {
               <QuarterSelect handler={this.handleSelection} position={7} quarterPool={quarterPool[2]} selection={selection} />
             </form>
           </div>
+
           <div>
             <form>
               <br />
@@ -230,6 +254,7 @@ class HokejApp extends Component {
               <FilterSelect handler={this.handleSelection} position={13} pickStart={10} selection={selection} />
             </form>
           </div>
+
           <div>
             <form>
               <br />
@@ -244,6 +269,7 @@ class HokejApp extends Component {
               <ThirdPlaceSelect handler={this.handleSelection} selection={selection} />
             </form>
           </div>
+
         </div>
         <div className="email">
           {"Zadejte e-mailovou adresu (nepovinné, GDPR):"}
