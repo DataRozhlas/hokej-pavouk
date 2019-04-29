@@ -1,15 +1,18 @@
 ﻿/* eslint-disable max-len */
+import "core-js/features/array/includes";
+import "core-js/features/string/includes";
+import "core-js/features/array/fill";
+import "core-js/features/object/assign";
 import React, { Component } from "react";
 import { render } from "react-dom";
 import Select, { components } from "react-select";
 import { ClipLoader } from "react-spinners";
 import { codeToName } from "./helperFunctions";
-import "core-js/features/array/includes";
 
 const SingleValue = ({ children, data, ...props }) => (
   <components.SingleValue {...props}>
     <img
-      alt={children}
+      alt={data.value}
       src={`https://data.irozhlas.cz/hokej-pavouk/flags/${data.value}.png`}
       className="flag"
     />
@@ -20,7 +23,7 @@ const SingleValue = ({ children, data, ...props }) => (
 const Option = ({ children, data, ...props }) => (
   <components.Option {...props}>
     <img
-      alt={children}
+      alt={data.value}
       src={`https://data.irozhlas.cz/hokej-pavouk/flags/${data.value}.png`}
       className="flag"
     />
