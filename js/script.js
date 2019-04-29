@@ -174,7 +174,6 @@ class HokejApp extends Component {
 
   sendForm() {
     const { selection } = this.state;
-    console.log(selection);
     // voheky
     const correctedSelection = selection.slice(0, 14);
     correctedSelection.push(selection[15], selection[16], selection[14], "()");
@@ -223,7 +222,7 @@ class HokejApp extends Component {
           <img src="assets/bracket2.png" className="hokej-bracket-3" alt="" />
           <FilterSelect handler={this.handleSelection} position={10} pickStart={4} selection={selection} />
           <FilterSelect handler={this.handleSelection} position={11} pickStart={6} selection={selection} />
-          
+
           <span className="hokej-desc-f">Finále</span>
           <FilterSelect handler={this.handleSelection} position={12} pickStart={8} selection={selection} />
           <FilterSelect handler={this.handleSelection} position={13} pickStart={10} selection={selection} />

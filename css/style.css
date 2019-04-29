@@ -18,6 +18,9 @@
   height: 450px;
 }
 
+.submit {
+  position: relative;
+}
 
 @media only screen and (max-width: 975px) {
   .hokej-container {
