@@ -22,6 +22,9 @@
 @media only screen and (max-width: 975px) {
   .hokej-container {
     overflow-x: scroll;
+    height: 750px;
+    padding-bottom: 250px;
+    margin-bottom: -250px;
   }
 }
 

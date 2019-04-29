@@ -27,12 +27,6 @@ const Option = ({ children, data, ...props }) => (
   </components.Option>
 );
 
-const selectStyles = {
-  menu: provided => ({
-    ...provided,
-  }),
-};
-
 const QuarterSelect = ({
   handler,
   position,
@@ -55,7 +49,6 @@ const QuarterSelect = ({
       placeholder="-- vyberte tým --"
       isSearchable={false}
       components={{ SingleValue, Option }}
-      styles={selectStyles}
     />
   );
 };
