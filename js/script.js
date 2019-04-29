@@ -10,7 +10,11 @@ const QuarterSelect = ({
   quarterPool,
   selection,
 }) => (
-  <select value={selection[position]} onChange={e => handler(e, position)}>
+  <select
+    className="hokej-select"
+    value={selection[position]}
+    onChange={e => handler(e, position)}
+  >
     <option disabled value={0}> -- vyberte tým-- </option>
     {quarterPool.map(el => (selection.includes(el)
       ? <option key={el} value={el} disabled>{codeToName(el)}</option>
@@ -25,6 +29,7 @@ const FilterSelect = ({
   pickStart,
 }) => (
   <select
+    className="hokej-select"
     value={selection[position]}
     onChange={e => handler(e, position)}
     disabled={selection.slice(pickStart, pickStart + 2).every(el => el !== 0) ? null : true}
@@ -42,6 +47,7 @@ const ThirdPlaceSelect = ({
   selection,
 }) => (
   <select
+    className="hokej-select"
     value={selection[15]}
     onChange={e => handler(e, 15, true)}
     disabled={selection.slice(12, 14).every(el => el !== 0) ? null : true}
@@ -242,22 +248,22 @@ class HokejApp extends Component {
         <div className="email">
           {"Zadejte e-mailovou adresu (nepovinné, GDPR):"}
           <form>
-            <input type="email" onChange={e => this.handleEmail(e)} />
+            <input type="email" className="form-control" onChange={e => this.handleEmail(e)} />
           </form>
         </div>
         <div className="submit">
-          <button type="submit" disabled={selection.every(el => el !== 0) ? null : true} onClick={this.sendForm}>Odeslat</button>
+          <button className="btn btn-primary" type="submit" disabled={selection.every(el => el !== 0) ? null : true} onClick={this.sendForm}>Odeslat</button>
           {window.innerWidth > 600
             ? (
               <span>
-                <button type="submit" onClick={this.FbShare} disabled={shareLink ? null : true}>Sdílej na FB</button>
-                <button type="submit" onClick={this.TwShare} disabled={shareLink ? null : true}>Sdílej na TW</button>
+                <button className="btn btn-primary" type="submit" onClick={this.FbShare} disabled={shareLink ? null : true}>Sdílej na FB</button>
+                <button className="btn btn-primary" type="submit" onClick={this.TwShare} disabled={shareLink ? null : true}>Sdílej na TW</button>
               </span>
             )
             : (
               <span>
-                <a href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`} target="_blank" rel="noopener noreferrer"><button type="submit" disabled={shareLink ? null : true}>Sdílej na FB</button></a>
-                <a href={`https://twitter.com/share?url=${shareLink}`} target="_blank" rel="noopener noreferrer"><button type="submit" disabled={shareLink ? null : true}>Sdílej na TW</button></a>
+                <a href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`} target="_blank" rel="noopener noreferrer"><button className="btn btn-primary" type="submit" disabled={shareLink ? null : true}>Sdílej na FB</button></a>
+                <a href={`https://twitter.com/share?url=${shareLink}`} target="_blank" rel="noopener noreferrer"><button className="btn btn-primary" type="submit" disabled={shareLink ? null : true}>Sdílej na TW</button></a>
               </span>
             )}
         </div>
