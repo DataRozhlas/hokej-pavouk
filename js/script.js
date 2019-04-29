@@ -184,7 +184,7 @@ class HokejApp extends Component {
     console.log(selection);
     // voheky
     const correctedSelection = selection.slice(0, 14);
-    correctedSelection.push(selection[15], selection[16], selection[14], "");
+    correctedSelection.push(selection[15], selection[16], selection[14], "()");
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "https://jq0d6e5rs6.execute-api.eu-west-1.amazonaws.com/prod");
     xhr.setRequestHeader("Content-Type", "application/json");
