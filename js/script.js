@@ -206,20 +206,20 @@ class HokejApp extends Component {
           <span className="hokej-desc-q">Čtvrtfinále</span>
           <QuarterSelect handler={this.handleSelection} position={0} quarterPool={quarterPool[1]} selection={selection} />
           <QuarterSelect handler={this.handleSelection} position={1} quarterPool={quarterPool[2]} selection={selection} />
-          <img src="assets/bracket1.png" className="hokej-bracket-1" alt="" />
+          <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket1.png" className="hokej-bracket-1" alt="" />
           <QuarterSelect handler={this.handleSelection} position={2} quarterPool={quarterPool[1]} selection={selection} />
           <QuarterSelect handler={this.handleSelection} position={3} quarterPool={quarterPool[2]} selection={selection} />
 
           <QuarterSelect handler={this.handleSelection} position={4} quarterPool={quarterPool[1]} selection={selection} />
           <QuarterSelect handler={this.handleSelection} position={5} quarterPool={quarterPool[2]} selection={selection} />
-          <img src="assets/bracket1.png" className="hokej-bracket-2" alt="" />
+          <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket1.png" className="hokej-bracket-2" alt="" />
           <QuarterSelect handler={this.handleSelection} position={6} quarterPool={quarterPool[1]} selection={selection} />
           <QuarterSelect handler={this.handleSelection} position={7} quarterPool={quarterPool[2]} selection={selection} />
 
           <span className="hokej-desc-s">Semifinále</span>
           <FilterSelect handler={this.handleSelection} position={8} pickStart={0} selection={selection} />
           <FilterSelect handler={this.handleSelection} position={9} pickStart={2} selection={selection} />
-          <img src="assets/bracket2.png" className="hokej-bracket-3" alt="" />
+          <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket2.png" className="hokej-bracket-3" alt="" />
           <FilterSelect handler={this.handleSelection} position={10} pickStart={4} selection={selection} />
           <FilterSelect handler={this.handleSelection} position={11} pickStart={6} selection={selection} />
 
@@ -227,7 +227,7 @@ class HokejApp extends Component {
           <FilterSelect handler={this.handleSelection} position={12} pickStart={8} selection={selection} />
           <FilterSelect handler={this.handleSelection} position={13} pickStart={10} selection={selection} />
 
-          <img src="assets/bracket3.png" className="hokej-bracket-4" alt="" />
+          <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket3.png" className="hokej-bracket-4" alt="" />
           <span className="hokej-desc-w">Mistr světa 2019</span>
           <FilterSelect handler={this.handleSelection} position={14} pickStart={12} selection={selection} />
 
