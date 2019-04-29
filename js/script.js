@@ -10,6 +10,7 @@ const SingleValue = ({ children, data, ...props }) => (
     <img
       alt={children}
       src={`https://data.irozhlas.cz/hokej-pavouk/flags/${data.value}.png`}
+      className="flag"
     />
     {children}
   </components.SingleValue>
@@ -20,10 +21,17 @@ const Option = ({ children, data, ...props }) => (
     <img
       alt={children}
       src={`https://data.irozhlas.cz/hokej-pavouk/flags/${data.value}.png`}
+      className="flag"
     />
     {children}
   </components.Option>
 );
+
+const selectStyles = {
+  menu: provided => ({
+    ...provided,
+  }),
+};
 
 const QuarterSelect = ({
   handler,
@@ -39,6 +47,7 @@ const QuarterSelect = ({
   return (
     <Select
       options={options}
+      className={`hokej-select hokej-select-${position}`}
       value={selection[position] !== 0
         ? { value: selection[position], label: codeToName(selection[position]) }
         : 0}
@@ -46,6 +55,7 @@ const QuarterSelect = ({
       placeholder="-- vyberte tým --"
       isSearchable={false}
       components={{ SingleValue, Option }}
+      styles={selectStyles}
     />
   );
 };
@@ -64,6 +74,7 @@ const FilterSelect = ({
   return (
     <Select
       options={options}
+      className={`hokej-select hokej-select-${position}`}
       value={selection[position] !== 0
         ? { value: selection[position], label: codeToName(selection[position]) }
         : 0}
@@ -89,6 +100,7 @@ const ThirdPlaceSelect = ({
   return (
     <Select
       options={options}
+      className="hokej-select hokej-select-15"
       value={selection[15] !== 0
         ? { value: selection[15], label: codeToName(selection[15]) }
         : 0}
@@ -118,14 +130,13 @@ class HokejApp extends Component {
     horní kastlík áčko, spodní kastlík béčko
     */
     this.state = {
-      // selection: new Array(17).fill(0),
-      selection: ["dk", "at", "fi", "ch", "fr", "cz", "ca", "it",
-        "dk", "fi", "fr", "ca", "dk", "fr", "dk", "fi", "ca"],
+      selection: new Array(17).fill(0),
+      // selection: ["dk", "at", "fi", "ch", "fr", "cz", "ca", "it",
+      //  "dk", "fi", "fr", "ca", "dk", "fr", "dk", "fi", "ca"],
       quarterPool: {
         1: ["ca", "us", "fi", "de", "sk", "dk", "fr", "gb"],
         2: ["se", "ru", "cz", "ch", "no", "lv", "at", "it"],
       },
-      email: "()",
       shareLink: undefined,
     };
 
@@ -133,6 +144,15 @@ class HokejApp extends Component {
     this.sendForm = this.sendForm.bind(this);
     this.FbShare = this.FbShare.bind(this);
     this.TwShare = this.TwShare.bind(this);
+  }
+
+  componentDidMount() {
+    if (window.location.href.includes("test")) {
+      this.setState({
+        selection: ["dk", "at", "fi", "ch", "fr", "cz", "ca", "it",
+          "dk", "fi", "fr", "ca", "dk", "fr", "dk", "fi", "ca"],
+      });
+    }
   }
 
   handleSelection(value, position, thirdPlace = false) {
@@ -159,16 +179,12 @@ class HokejApp extends Component {
     this.setState({ selection, quarterPool });
   }
 
-  handleEmail(e) {
-    this.setState({ email: e.target.value });
-  }
-
   sendForm() {
-    const { selection, email } = this.state;
+    const { selection } = this.state;
     console.log(selection);
     // voheky
     const correctedSelection = selection.slice(0, 14);
-    correctedSelection.push(selection[15], selection[16], selection[14], email);
+    correctedSelection.push(selection[15], selection[16], selection[14], "");
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "https://jq0d6e5rs6.execute-api.eu-west-1.amazonaws.com/prod");
     xhr.setRequestHeader("Content-Type", "application/json");
@@ -194,96 +210,50 @@ class HokejApp extends Component {
     const { quarterPool, selection, shareLink } = this.state;
     return (
       <div>
-        {`Tohle jsou možnosti! ${selection}`}
-        <div className="hokejFlex">
-          <div>
-            <form>
-              <br />
-              <QuarterSelect handler={this.handleSelection} position={0} quarterPool={quarterPool[1]} selection={selection} />
-              <br />
-              <QuarterSelect handler={this.handleSelection} position={1} quarterPool={quarterPool[2]} selection={selection} />
-              <br />
-              <br />
-              <QuarterSelect handler={this.handleSelection} position={2} quarterPool={quarterPool[1]} selection={selection} />
-              <br />
-              <QuarterSelect handler={this.handleSelection} position={3} quarterPool={quarterPool[2]} selection={selection} />
-              <br />
-              <br />
-              <QuarterSelect handler={this.handleSelection} position={4} quarterPool={quarterPool[1]} selection={selection} />
-              <br />
-              <QuarterSelect handler={this.handleSelection} position={5} quarterPool={quarterPool[2]} selection={selection} />
-              <br />
-              <br />
-              <QuarterSelect handler={this.handleSelection} position={6} quarterPool={quarterPool[1]} selection={selection} />
-              <br />
-              <QuarterSelect handler={this.handleSelection} position={7} quarterPool={quarterPool[2]} selection={selection} />
-            </form>
-          </div>
+        <div className="hokej-container">
+          <span className="hokej-desc-q">Čtvrtfinále</span>
+          <QuarterSelect handler={this.handleSelection} position={0} quarterPool={quarterPool[1]} selection={selection} />
+          <QuarterSelect handler={this.handleSelection} position={1} quarterPool={quarterPool[2]} selection={selection} />
+          <img src="assets/bracket1.png" className="hokej-bracket-1" alt="" />
+          <QuarterSelect handler={this.handleSelection} position={2} quarterPool={quarterPool[1]} selection={selection} />
+          <QuarterSelect handler={this.handleSelection} position={3} quarterPool={quarterPool[2]} selection={selection} />
 
-          <div>
-            <form>
-              <br />
-              <br />
-              <br />
-              <FilterSelect handler={this.handleSelection} position={8} pickStart={0} selection={selection} />
-              <br />
-              <FilterSelect handler={this.handleSelection} position={9} pickStart={2} selection={selection} />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <FilterSelect handler={this.handleSelection} position={10} pickStart={4} selection={selection} />
-              <br />
-              <FilterSelect handler={this.handleSelection} position={11} pickStart={6} selection={selection} />
-            </form>
-          </div>
-          <div>
-            <form>
-              <br />
-              <br />
-              <br />
-              <br />
-              <FilterSelect handler={this.handleSelection} position={12} pickStart={8} selection={selection} />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <FilterSelect handler={this.handleSelection} position={13} pickStart={10} selection={selection} />
-            </form>
-          </div>
+          <QuarterSelect handler={this.handleSelection} position={4} quarterPool={quarterPool[1]} selection={selection} />
+          <QuarterSelect handler={this.handleSelection} position={5} quarterPool={quarterPool[2]} selection={selection} />
+          <img src="assets/bracket1.png" className="hokej-bracket-2" alt="" />
+          <QuarterSelect handler={this.handleSelection} position={6} quarterPool={quarterPool[1]} selection={selection} />
+          <QuarterSelect handler={this.handleSelection} position={7} quarterPool={quarterPool[2]} selection={selection} />
 
-          <div>
-            <form>
-              <br />
-              {"1. místo"}
-              <FilterSelect handler={this.handleSelection} position={14} pickStart={12} selection={selection} />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              {"3. místo"}
-              <ThirdPlaceSelect handler={this.handleSelection} selection={selection} />
-            </form>
-          </div>
+          <span className="hokej-desc-s">Semifinále</span>
+          <FilterSelect handler={this.handleSelection} position={8} pickStart={0} selection={selection} />
+          <FilterSelect handler={this.handleSelection} position={9} pickStart={2} selection={selection} />
+          <img src="assets/bracket2.png" className="hokej-bracket-3" alt="" />
+          <FilterSelect handler={this.handleSelection} position={10} pickStart={4} selection={selection} />
+          <FilterSelect handler={this.handleSelection} position={11} pickStart={6} selection={selection} />
+          
+          <span className="hokej-desc-f">Finále</span>
+          <FilterSelect handler={this.handleSelection} position={12} pickStart={8} selection={selection} />
+          <FilterSelect handler={this.handleSelection} position={13} pickStart={10} selection={selection} />
 
-        </div>
-        <div className="email">
-          {"Zadejte e-mailovou adresu (nepovinné, GDPR):"}
-          <form>
-            <input type="email" className="form-control" onChange={e => this.handleEmail(e)} />
-          </form>
+          <img src="assets/bracket3.png" className="hokej-bracket-4" alt="" />
+          <span className="hokej-desc-w">Mistr světa 2019</span>
+          <FilterSelect handler={this.handleSelection} position={14} pickStart={12} selection={selection} />
+
+          <span className="hokej-desc-t">Třetí místo</span>
+          <ThirdPlaceSelect handler={this.handleSelection} selection={selection} />
         </div>
         <div className="submit">
-          <button className="btn btn-primary" type="submit" disabled={selection.every(el => el !== 0) ? null : true} onClick={this.sendForm}>Odeslat</button>
+          {!shareLink
+            ? (
+              <button className="btn btn-primary" type="submit" disabled={selection.every(el => el !== 0) ? null : true} onClick={this.sendForm}>Uložit tip</button>
+            ) : (
+              <div className="btn btn-green">Tip uložen!</div>
+            )}
           {window.innerWidth > 600
             ? (
               <span>
-                <button className="btn btn-primary" type="submit" onClick={this.FbShare} disabled={shareLink ? null : true}>Sdílej na FB</button>
-                <button className="btn btn-primary" type="submit" onClick={this.TwShare} disabled={shareLink ? null : true}>Sdílej na TW</button>
+                <button className="btn btn-primary" type="submit" onClick={this.FbShare} disabled={shareLink ? null : true}>Sdílet na Facebooku</button>
+                <button className="btn btn-primary" type="submit" onClick={this.TwShare} disabled={shareLink ? null : true}>Sdílet na Twitteru</button>
               </span>
             )
             : (
