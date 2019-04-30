@@ -222,6 +222,7 @@ class HokejApp extends Component {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = () => {
       if (xhr.status === 200) {
+        document.getElementById("submit").scrollIntoView({ behavior: "smooth", block: "end" });
         this.setState({
           shareLink: JSON.parse(xhr.responseText),
           loading: false,
@@ -286,7 +287,7 @@ class HokejApp extends Component {
           <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket3.png" className="hokej-bracket-5" alt="" />
           <ThirdPlaceSelect handler={this.handleSelection} selection={selection} disabled={shareLink} />
         </div>
-        <div className="submit">
+        <div id="submit">
           {!shareLink
             ? (
               <span>
