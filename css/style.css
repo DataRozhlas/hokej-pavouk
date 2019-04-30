@@ -1,3 +1,21 @@
+/* branding */
+
+@media (min-width: 1360px) {
+  main {
+    width: 1220px;
+    margin: 0 auto;
+  }
+  .branding__holder {
+    background-color: #df2b0e;
+    background: url('https://www.irozhlas.cz/sites/default/files/uploader_unmanaged/ms-hokej-branding-2_190429-101754_ace.png') 50% 0 no-repeat fixed;
+  }
+  .page-header-branding .header .header__top {
+    padding-top: 7px;
+  }
+}
+
+/* main */
+
 #hokej {
   padding-top: 30px;
   font-family: Arial, Helvetica, sans-serif;
@@ -10,7 +28,7 @@
   justify-content: space-around;
 }
 
-.hokejFlex > div {
+.hokejFlex>div {
   width: 200px;
 }
 
@@ -32,7 +50,7 @@
   }
 }
 
-.hokej-container > * {
+.hokej-container>* {
   position: absolute;
 }
 
@@ -186,10 +204,11 @@ input:invalid {
 }
 
 .flag {
-  padding-right: 5px; 
+  padding-right: 5px;
 }
 
 /* based on bootstrap buttons */
+
 .btn {
   display: inline-block;
   font-weight: 400;
@@ -230,8 +249,7 @@ input:invalid {
   opacity: 0.65;
 }
 
-a.btn.disabled,
-fieldset:disabled a.btn {
+a.btn.disabled, fieldset:disabled a.btn {
   pointer-events: none;
 }
 
@@ -269,14 +287,12 @@ fieldset:disabled a.btn {
   border-color: #ececec;
 }
 
-.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
-.show > .btn-primary.dropdown-toggle {
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show>.btn-primary.dropdown-toggle {
   color: #fff;
   background-color: #0062cc;
   border-color: #005cbf;
 }
 
-.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
-.show > .btn-primary.dropdown-toggle:focus {
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show>.btn-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
-} 
+}
