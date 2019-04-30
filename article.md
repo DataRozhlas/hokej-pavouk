@@ -6,7 +6,10 @@ styles: []
 libraries: [] #jquery, d3, highcharts, datatables
 options: [noheader, nopic] #wide, noheader (, nopic)
 ---
+Tipněte si s námi vítěze letošního hokejového mistrovství! Stačí vybrat týmy pro čtvrtfinále, semifinále, finále a boj o třetí místo. Vyplňte následujícího pavouka podle postupového klíče: vítězové skupiny se utkají se čtvrtými z protější skupiny, druzí se třetími. Výběr uložte a sdílejte s přáteli na Facebooku nebo Twitteru.
+
+Tipovat můžete do začátku čtvrtfinálového kola 22. května 12.00.
+
 <wide>
-  Tipněte si s námi vítěze letošního hokejového mistrovství a vyhrajte! Stačí tipnout týmy ve čtvrtfinále, semifinále, finále a v boji o třetí místo. Vyplňte postupně následujícího pavouka a výběr uložte. Změnit ho můžete jen do začátku čtvrtfinálových kol. Chcete se pochlubit přátelům? Sdílejte svůj tip na Facebooku nebo Twitteru.
   <div id="hokej"></div>
 </wide>

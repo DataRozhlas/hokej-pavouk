@@ -1,5 +1,6 @@
 #hokej {
   padding-top: 30px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .hokejFlex {
@@ -155,14 +156,29 @@
 
 .hokej-desc-t {
   left: 753px;
-  top: 293px;
+  top: 283px;
   font-weight: bold;
   font-variant: small-caps;
 }
 
 .hokej-select-15 {
   left: 753px;
-  top: 323px;
+  top: 313px;
+}
+
+.hokej-select-dummy-0 {
+  left: 510px;
+  top: 294px;
+}
+
+.hokej-select-dummy-1 {
+  left: 510px;
+  top: 334px;
+}
+
+.hokej-bracket-5 {
+  left: 710px;
+  top: 331px;
 }
 
 input:invalid {
@@ -195,10 +211,9 @@ input:invalid {
   margin-top: 10px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .btn {
-    transition: none;
-  }
+#btn-reset {
+  background-color: #00a6ff;
+  border-color: #00a6ff;
 }
 
 .btn:hover {

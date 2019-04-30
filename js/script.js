@@ -31,6 +31,13 @@ const Option = ({ children, data, ...props }) => (
   </components.Option>
 );
 
+const customStyles = {
+  dropdownIndicator: (provided, { isDisabled }) => ({
+    ...provided,
+    color: isDisabled ? "#CCCCCC" : "black",
+  }),
+};
+
 const QuarterSelect = ({
   handler,
   position,
@@ -40,9 +47,7 @@ const QuarterSelect = ({
 }) => {
   const options = quarterPool.map(el => (selection.includes(el)
     ? { value: el, isDisabled: true, label: codeToName(el) }
-    : { value: el, label: codeToName(el) }
-  ));
-
+    : { value: el, isDisabled: false, label: codeToName(el) })).sort((a, b) => a.isDisabled - b.isDisabled);
   return (
     <Select
       options={options}
@@ -55,6 +60,7 @@ const QuarterSelect = ({
       isSearchable={false}
       isDisabled={disabled && true}
       components={{ SingleValue, Option }}
+      styles={customStyles}
     />
   );
 };
@@ -83,6 +89,7 @@ const FilterSelect = ({
       isSearchable={false}
       isDisabled={selection.slice(pickStart, pickStart + 2).every(el => el !== 0) && !disabled ? null : true}
       components={{ SingleValue, Option }}
+      styles={customStyles}
     />
   );
 };
@@ -110,6 +117,29 @@ const ThirdPlaceSelect = ({
       isSearchable={false}
       isDisabled={selection.slice(12, 14).every(el => el !== 0) && !disabled ? null : true}
       components={{ SingleValue, Option }}
+      styles={customStyles}
+    />
+  );
+};
+
+const DummySelect = ({ selection, team }) => {
+  const options = selection
+    .slice(8, 12)
+    .filter(el => !selection.slice(12, 14).includes(el))
+    .filter(el => el !== 0)
+    .map(el => ({ value: el, label: codeToName(el) }));
+
+  return (
+    <Select
+      options={options}
+      className={`hokej-select hokej-select-dummy-${team}`}
+      value={options.length === 2 && selection.slice(12, 14).every(el => el !== 0)
+        ? options[team]
+        : 0}
+      placeholder="-- vyberte finalisty --"
+      isDisabled
+      components={{ SingleValue, Option }}
+      styles={customStyles}
     />
   );
 };
@@ -142,6 +172,7 @@ class HokejApp extends Component {
 
     this.handleSelection = this.handleSelection.bind(this);
     this.sendForm = this.sendForm.bind(this);
+    this.resetForm = this.resetForm.bind(this);
     this.FbShare = this.FbShare.bind(this);
     this.TwShare = this.TwShare.bind(this);
   }
@@ -199,6 +230,10 @@ class HokejApp extends Component {
     xhr.send(JSON.stringify(correctedSelection));
   }
 
+  resetForm() {
+    this.setState({ selection: new Array(17).fill(0) });
+  }
+
   FbShare() {
     const { shareLink } = this.state;
     window.open(`${`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`}`, "Sdílení", "width=550,height=450,scrollbars=no");
@@ -220,11 +255,11 @@ class HokejApp extends Component {
           <QuarterSelect handler={this.handleSelection} position={0} quarterPool={quarterPool[1]} selection={selection} disabled={shareLink} />
           <QuarterSelect handler={this.handleSelection} position={1} quarterPool={quarterPool[2]} selection={selection} disabled={shareLink} />
           <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket1.png" className="hokej-bracket-1" alt="" />
-          <QuarterSelect handler={this.handleSelection} position={2} quarterPool={quarterPool[1]} selection={selection} disabled={shareLink} />
-          <QuarterSelect handler={this.handleSelection} position={3} quarterPool={quarterPool[2]} selection={selection} disabled={shareLink} />
+          <QuarterSelect handler={this.handleSelection} position={2} quarterPool={quarterPool[2]} selection={selection} disabled={shareLink} />
+          <QuarterSelect handler={this.handleSelection} position={3} quarterPool={quarterPool[1]} selection={selection} disabled={shareLink} />
 
-          <QuarterSelect handler={this.handleSelection} position={4} quarterPool={quarterPool[1]} selection={selection} disabled={shareLink} />
-          <QuarterSelect handler={this.handleSelection} position={5} quarterPool={quarterPool[2]} selection={selection} disabled={shareLink} />
+          <QuarterSelect handler={this.handleSelection} position={4} quarterPool={quarterPool[2]} selection={selection} disabled={shareLink} />
+          <QuarterSelect handler={this.handleSelection} position={5} quarterPool={quarterPool[1]} selection={selection} disabled={shareLink} />
           <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket1.png" className="hokej-bracket-2" alt="" />
           <QuarterSelect handler={this.handleSelection} position={6} quarterPool={quarterPool[1]} selection={selection} disabled={shareLink} />
           <QuarterSelect handler={this.handleSelection} position={7} quarterPool={quarterPool[2]} selection={selection} disabled={shareLink} />
@@ -245,20 +280,26 @@ class HokejApp extends Component {
           <FilterSelect handler={this.handleSelection} position={14} pickStart={12} selection={selection} disabled={shareLink} />
 
           <span className="hokej-desc-t">Třetí místo</span>
+          <DummySelect selection={selection} team={0} />
+          <DummySelect selection={selection} team={1} />
+          <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket3.png" className="hokej-bracket-5" alt="" />
           <ThirdPlaceSelect handler={this.handleSelection} selection={selection} disabled={shareLink} />
         </div>
         <div className="submit">
           {!shareLink
             ? (
-              <button className="btn btn-primary" type="submit" disabled={selection.every(el => el !== 0) ? null : true} onClick={this.sendForm}>
-                {!loading && "Uložit tip"}
-                <ClipLoader
-                  sizeUnit="px"
-                  size={20}
-                  color="#ffffff"
-                  loading={loading}
-                />
-              </button>
+              <span>
+                <button className="btn btn-primary" type="submit" disabled={selection.every(el => el !== 0) ? null : true} onClick={this.sendForm}>
+                  {!loading && "Uložit tip"}
+                  <ClipLoader
+                    sizeUnit="px"
+                    size={20}
+                    color="#ffffff"
+                    loading={loading}
+                  />
+                </button>
+                <button className="btn btn-primary" id="btn-reset" onClick={this.resetForm} type="button">Resetovat</button>
+              </span>
             ) : (
               <div className="btn btn-green">Tip uložen!</div>
             )}
