@@ -7,11 +7,21 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import Select, { components } from "react-select";
 import { ClipLoader } from "react-spinners";
-import smoothscroll from 'smoothscroll-polyfill';
+import smoothscroll from "smoothscroll-polyfill";
 import { codeToName, posToTeam } from "./helperFunctions";
 
 smoothscroll.polyfill();
 const isDesktop = window.innerWidth > 600;
+
+// děsnej mobilní hack na správné naskrolení inputu
+function scrollSelect(e) {
+  if (!isDesktop) {
+    const container = document.getElementById("hokej-container");
+    const elementOffset = e.target.parentElement.parentElement.parentElement.offsetLeft;
+    container.scroll({ left: elementOffset - 81, behavior: "smooth" });
+    container.scroll({ left: elementOffset - 80, behavior: "smooth" });
+  }
+}
 
 const SingleValue = ({ children, data, ...props }) => (
   <components.SingleValue {...props}>
@@ -60,6 +70,7 @@ const QuarterSelect = ({
         ? { value: selection[position], label: codeToName(selection[position]) }
         : 0}
       onChange={val => handler(val.value, position)}
+      onFocus={e => scrollSelect(e)}
       placeholder={`-- vyberte tým ${posToTeam(position)} --`}
       isSearchable={false}
       isDisabled={disabled && true}
@@ -89,15 +100,7 @@ const FilterSelect = ({
         ? { value: selection[position], label: codeToName(selection[position]) }
         : 0}
       onChange={val => handler(val.value, position)}
-      onFocus={(e) => {
-        // děsnej mobilní hack na správné naskrolení inputu
-        if (!isDesktop) {
-          const container = document.getElementById("hokej-container")
-          const elementOffset = e.target.parentElement.parentElement.parentElement.offsetLeft;
-          container.scroll({left: elementOffset - 81, behavior: "smooth"});
-          container.scroll({left: elementOffset - 80, behavior: "smooth"});
-        }
-      }}
+      onFocus={e => scrollSelect(e)}
       placeholder="-- vyberte tým --"
       isSearchable={false}
       isDisabled={selection.slice(pickStart, pickStart + 2).every(el => el !== 0) && !disabled ? null : true}
@@ -126,7 +129,7 @@ const ThirdPlaceSelect = ({
         ? { value: selection[15], label: codeToName(selection[15]) }
         : 0}
       onChange={val => handler(val.value, 15, true)}
-      onFocus={e => console.log(e.target.offsetLeft)}
+      onFocus={e => scrollSelect(e)}
       placeholder="-- vyberte tým --"
       isSearchable={false}
       isDisabled={selection.slice(12, 14).every(el => el !== 0) && !disabled ? null : true}
