@@ -218,9 +218,13 @@
 </script>
 <style>article li{background:0 0!important;margin:0!important;padding:0!important}article ol,article ul{list-style:initial!important;font-size:medium!important;line-height:1.5!important}article hr{max-width:none!important}@media (min-width:1360px){main{width:1220px;margin:0 auto}.branding__holder{background-color:#df2b0e;background:url(https://www.irozhlas.cz/sites/default/files/uploader_unmanaged/ms-hokej-branding-2_190429-101754_ace.png) 50% 0 no-repeat fixed}.page-header-branding .header .header__top{padding-top:7px}}#hokej{padding-top:30px;font-family:Arial,Helvetica,sans-serif}.hokejFlex{display:flex;overflow-x:scroll;width:100%;justify-content:space-around}.hokejFlex>div{width:200px}.hokej-container{position:relative;height:450px}.submit{position:relative}@media only screen and (max-width:975px){.hokej-container{overflow-x:scroll;height:750px;padding-bottom:250px;margin-bottom:-250px}}.hokej-container>*{position:absolute}.hokej-desc-q{top:-25px;font-weight:700;font-variant:small-caps}.hokej-select{width:200px}.hokej-select-0{top:0}.hokej-select-1{top:40px}.hokej-bracket-1{left:200px;top:37px}.hokej-select-2{top:113px}.hokej-select-3{top:153px}.hokej-select-4{top:236px}.hokej-select-5{top:276px}.hokej-bracket-2{left:200px;top:273px}.hokej-select-6{top:349px}.hokej-select-7{top:389px}.hokej-desc-s{left:256px;top:-25px;font-weight:700;font-variant:small-caps}.hokej-select-8{left:256px;top:58px}.hokej-select-9{left:256px;top:98px}.hokej-bracket-3{left:456px;top:94px}.hokej-select-10{left:256px;top:294px}.hokej-select-11{left:256px;top:334px}.hokej-desc-f{left:510px;top:-25px;font-weight:700;font-variant:small-caps}.hokej-select-12{left:510px;top:104px}.hokej-select-13{left:510px;top:144px}.hokej-bracket-4{left:710px;top:141px}.hokej-desc-w{left:753px;top:-25px;font-weight:700;font-variant:small-caps}.hokej-select-14{left:753px;top:123px}.hokej-desc-t{left:753px;top:283px;font-weight:700;font-variant:small-caps}.hokej-select-15{left:753px;top:313px}.hokej-select-dummy-0{left:510px;top:294px}.hokej-select-dummy-1{left:510px;top:334px}.hokej-bracket-5{left:710px;top:331px}input:invalid{background-color:pink}.flag{padding-right:5px}.btn{display:inline-block;font-weight:400;color:#212529;text-align:center;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:.5rem .5rem;font-size:1rem;line-height:1.5;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;margin-right:10px;margin-top:10px}#btn-reset{background-color:#00a6ff;border-color:#00a6ff}.btn:hover{color:#212529;text-decoration:none}.btn.focus,.btn:focus{outline:0;box-shadow:0 0 0 .2rem rgba(0,123,255,.25)}.btn.disabled,.btn:disabled{opacity:.65}a.btn.disabled,fieldset:disabled a.btn{pointer-events:none}.btn-primary{color:#fff;background-color:#007bff;border-color:#007bff}.btn-green{color:#fff;background-color:#090;border-color:#090}.btn-green:hover{color:#fff;background-color:#090;border-color:#090}.btn-primary:hover{color:#fff;background-color:#0069d9;border-color:#0062cc}.btn-primary.focus,.btn-primary:focus{box-shadow:0 0 0 .2rem rgba(38,143,255,.5)}.btn-primary.disabled,.btn-primary:disabled{color:#fff;background-color:#ececec;border-color:#ececec}.btn-primary:not(:disabled):not(.disabled).active,.btn-primary:not(:disabled):not(.disabled):active,.show>.btn-primary.dropdown-toggle{color:#fff;background-color:#0062cc;border-color:#005cbf}.btn-primary:not(:disabled):not(.disabled).active:focus,.btn-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(38,143,255,.5)}</style>
 <div class="row-main row-main--article">
-<h1 class="b-data__title b-data__title--sm">
+<h1 class="b-data__title b-data__title--sm" id="snfl-title-div">
 <!--[[ZPRAVY_TITLE:]]-->
 </h1>
+<script>if (window.location.href.indexOf("www.irozhlas") < 0) {
+  document.getElementById("snfl-title-div").innerHTML = "Tipněte si vývoj a vítěze MS v hokeji 2019";
+}
+</script>
 </div>
 <!--[[ZPRAVY_SNOWFALL_METADATA:]]-->
 <div class="row-main row-main--narrow">
@@ -230,7 +234,7 @@
 <p>Tipovat můžete do začátku čtvrtfinálového kola 22. května 12.00.</p>
 </div><div class="row-main row-main--article">
   <div id="hokej"></div>
-</div><div class="row-main row-main--narrow">
+</div><div class="row-main row-main--narrow"> 
 
 
 <p class="meta meta--right meta--big">
