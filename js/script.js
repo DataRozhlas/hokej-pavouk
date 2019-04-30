@@ -7,8 +7,10 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import Select, { components } from "react-select";
 import { ClipLoader } from "react-spinners";
+import smoothscroll from 'smoothscroll-polyfill';
 import { codeToName, posToTeam } from "./helperFunctions";
 
+smoothscroll.polyfill();
 const isDesktop = window.innerWidth > 600;
 
 const SingleValue = ({ children, data, ...props }) => (
@@ -87,6 +89,15 @@ const FilterSelect = ({
         ? { value: selection[position], label: codeToName(selection[position]) }
         : 0}
       onChange={val => handler(val.value, position)}
+      onFocus={(e) => {
+        // děsnej mobilní hack na správné naskrolení inputu
+        if (!isDesktop) {
+          const container = document.getElementById("hokej-container")
+          const elementOffset = e.target.parentElement.parentElement.parentElement.offsetLeft;
+          container.scroll({left: elementOffset - 81, behavior: "smooth"});
+          container.scroll({left: elementOffset - 80, behavior: "smooth"});
+        }
+      }}
       placeholder="-- vyberte tým --"
       isSearchable={false}
       isDisabled={selection.slice(pickStart, pickStart + 2).every(el => el !== 0) && !disabled ? null : true}
@@ -115,6 +126,7 @@ const ThirdPlaceSelect = ({
         ? { value: selection[15], label: codeToName(selection[15]) }
         : 0}
       onChange={val => handler(val.value, 15, true)}
+      onFocus={e => console.log(e.target.offsetLeft)}
       placeholder="-- vyberte tým --"
       isSearchable={false}
       isDisabled={selection.slice(12, 14).every(el => el !== 0) && !disabled ? null : true}
@@ -253,7 +265,7 @@ class HokejApp extends Component {
     } = this.state;
     return (
       <div>
-        <div className="hokej-container">
+        <div id="hokej-container">
           <span className="hokej-desc-q">Čtvrtfinále</span>
           <QuarterSelect handler={this.handleSelection} position={0} quarterPool={quarterPool[1]} selection={selection} disabled={shareLink} />
           <QuarterSelect handler={this.handleSelection} position={1} quarterPool={quarterPool[2]} selection={selection} disabled={shareLink} />

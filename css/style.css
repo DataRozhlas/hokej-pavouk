@@ -32,7 +32,7 @@
   width: 200px;
 }
 
-.hokej-container {
+#hokej-container {
   position: relative;
   height: 450px;
 }
@@ -42,7 +42,7 @@
 }
 
 @media only screen and (max-width: 975px) {
-  .hokej-container {
+  #hokej-container {
     overflow-x: scroll;
     height: 750px;
     padding-bottom: 250px;
@@ -50,7 +50,7 @@
   }
 }
 
-.hokej-container>* {
+#hokej-container>* {
   position: absolute;
 }
 

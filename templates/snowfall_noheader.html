@@ -4,6 +4,10 @@
   document.getElementsByTagName('article')[0].classList.add('b-data--no-img');
   document.addEventListener("DOMContentLoaded", function(event) { 
     document.getElementById("search").tabIndex = "-1";
+    var selektitka = document.getElementsByClassName("hokej-select");
+    for (var i = 0; i < selektitka.length; i++) {
+      selektitka[i].display = "none";
+    }
   });
 
   // branding start
