@@ -9,6 +9,7 @@ import Select, { components } from "react-select";
 import { ClipLoader } from "react-spinners";
 import { codeToName, posToTeam } from "./helperFunctions";
 
+
 const SingleValue = ({ children, data, ...props }) => (
   <components.SingleValue {...props}>
     <img
@@ -316,6 +317,7 @@ class HokejApp extends Component {
                 <a href={`https://twitter.com/share?url=${shareLink}`} target="_blank" rel="noopener noreferrer"><button className="btn btn-primary" type="submit" disabled={shareLink ? null : true}>Sdílet na Twitteru</button></a>
               </span>
             )}
+          <a href={shareLink ? `${shareLink.substring(0, shareLink.length - 4)}png` : null}><button className="btn btn-primary" type="button" disabled={shareLink ? null : true}>Stáhnout tip</button></a>
         </div>
       </div>
     );
