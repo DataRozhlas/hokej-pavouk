@@ -2,6 +2,11 @@
 {libraries}
 <script type="text/javascript">
   document.getElementsByTagName('article')[0].classList.add('b-data--no-img');
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    document.getElementById("search").tabIndex = "-1";
+  });
+
+  // branding start
   var branding = document.createElement("div")
   branding.className = "branding";
   var brandingHolder = document.createElement("a");
@@ -10,7 +15,9 @@
   brandingHolder.onclick = "ga('gtm1.send', 'event', 'ondemand', 'click' , 'MS hokej 2019  - branding');";
   brandingHolder.innerHTML = "Mistrovství světa v hokeji 2019";
   branding.appendChild(brandingHolder);
-  document.getElementsByTagName("body")[0].prepend(branding);
+  var body = document.getElementsByTagName("body")[0];
+  body.insertBefore(branding, body.firstChild);
+  // branding konec
 </script>
 {styles}
 <div class="row-main row-main--article">

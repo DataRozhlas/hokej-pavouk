@@ -9,6 +9,7 @@ import Select, { components } from "react-select";
 import { ClipLoader } from "react-spinners";
 import { codeToName, posToTeam } from "./helperFunctions";
 
+const isDesktop = window.innerWidth > 600;
 
 const SingleValue = ({ children, data, ...props }) => (
   <components.SingleValue {...props}>
@@ -222,7 +223,7 @@ class HokejApp extends Component {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = () => {
       if (xhr.status === 200) {
-        document.getElementById("submit").scrollIntoView({ behavior: "smooth", block: "end" });
+        if (!isDesktop) document.getElementById("submit").scrollIntoView({ behavior: "smooth", block: "end" });
         this.setState({
           shareLink: JSON.parse(xhr.responseText),
           loading: false,
@@ -305,7 +306,7 @@ class HokejApp extends Component {
             ) : (
               <div className="btn btn-green">Tip uložen!</div>
             )}
-          {window.innerWidth > 600
+          {isDesktop
             ? (
               <span>
                 <button className="btn btn-primary" type="submit" onClick={this.FbShare} disabled={shareLink ? null : true}>Sdílet na Facebooku</button>

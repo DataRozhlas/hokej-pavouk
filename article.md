@@ -12,4 +12,4 @@ Tipovat můžete do začátku čtvrtfinálového kola 22. května 12.00.
 
 <wide>
   <div id="hokej"></div>
-</wide> 
+</wide>
