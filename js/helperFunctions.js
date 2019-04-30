@@ -37,4 +37,27 @@ export function codeToName(code) {
   }
 }
 
+export function posToTeam(pos) {
+  switch (pos) {
+    case 0:
+      return "A1";
+    case 1:
+      return "B4";
+    case 2:
+      return "B2";
+    case 3:
+      return "A3";
+    case 4:
+      return "B1";
+    case 5:
+      return "A4";
+    case 6:
+      return "A2";
+    case 7:
+      return "B3";
+    default:
+      return pos;
+  }
+}
+
 export default codeToName;

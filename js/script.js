@@ -7,7 +7,7 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import Select, { components } from "react-select";
 import { ClipLoader } from "react-spinners";
-import { codeToName } from "./helperFunctions";
+import { codeToName, posToTeam } from "./helperFunctions";
 
 const SingleValue = ({ children, data, ...props }) => (
   <components.SingleValue {...props}>
@@ -51,7 +51,7 @@ const QuarterSelect = ({
         ? { value: selection[position], label: codeToName(selection[position]) }
         : 0}
       onChange={val => handler(val.value, position)}
-      placeholder="-- vyberte tým --"
+      placeholder={`-- vyberte tým ${posToTeam(position)} --`}
       isSearchable={false}
       isDisabled={disabled && true}
       components={{ SingleValue, Option }}
