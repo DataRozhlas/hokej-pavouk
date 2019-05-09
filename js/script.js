@@ -223,7 +223,7 @@ class HokejApp extends Component {
     }
 
     // eslint-disable-next-line prefer-destructuring
-    if (thirdPlace) selection[16] = selection.slice(8, 12).filter(el => !selection.slice(13, 15).includes(el) && selection[15] !== el).slice(-1)[0];
+    if (thirdPlace) selection[16] = selection.slice(8, 12).filter(el => !selection.slice(12, 14).includes(el) && selection[15] !== el)[0];
     this.setState({ selection, quarterPool });
   }
 
