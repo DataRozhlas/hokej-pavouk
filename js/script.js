@@ -180,8 +180,8 @@ class HokejApp extends Component {
     this.state = {
       selection: new Array(17).fill(0),
       quarterPool: {
-        1: ["ca", "us", "fi", "de", "sk", "dk", "fr", "gb"],
-        2: ["se", "ru", "cz", "ch", "no", "lv", "at", "it"],
+        1: ["ru", "se", "cz", "ch", "sk", "dk", "by", "gb"],
+        2: ["ca", "fi", "us", "de", "lv", "no", "it", "kz"],
       },
       shareLink: undefined,
       loading: false,
