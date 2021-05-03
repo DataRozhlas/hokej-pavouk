@@ -294,7 +294,7 @@ class HokejApp extends Component {
           <FilterSelect handler={this.handleSelection} position={13} pickStart={10} selection={selection} disabled={shareLink} />
 
           <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket3.png" className="hokej-bracket-4" alt="" />
-          <span className="hokej-desc-w">Mistr světa 2019</span>
+          <span className="hokej-desc-w">Mistr světa 2021</span>
           <FilterSelect handler={this.handleSelection} position={14} pickStart={12} selection={selection} disabled={shareLink} />
 
           <span className="hokej-desc-t">Třetí místo</span>
