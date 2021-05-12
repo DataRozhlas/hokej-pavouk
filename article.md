@@ -14,8 +14,8 @@ options: [noheader, nopic] #wide, noheader (, nopic)
 <wide>
   <div id="hokej"></div>
 </wide>
-
-<div id="ceny" class="row-main row-main--narrow mt--20">
+<wide>
+<div id="ceny" class="row-main mt--20">
 <h2 class="mt--20 mb--10">Ceny tipovačky</h2>
 <p class="clearfix">
 <img loading="lazy" src="https://www.irozhlas.cz/sites/default/files/uploader_unmanaged/tipovacka-ceny-1_210512-114154_ace.png" width="240" class="pull-left hide--m">
@@ -41,4 +41,4 @@ options: [noheader, nopic] #wide, noheader (, nopic)
 <p>Ceny získává 10 nejpřesnějších tipů seřazených dle data zveřejnění a publikované s hashtagem <strong>#irozhlas-tipovacka</strong> na sociálních sítích Facebook nebo Twitter. Tipovat je možné do půlnoci 26. května 2021. Od každého tipujícího bude zařazen pouze první zveřejněný tip. Výsledky tipovačky zveřejníme po skončení šampionátu v červnu 2021 na serveru iROZHLAS.    
 </p>
 <a onclick="ga('gtm1.send', 'event', 'ondemand', 'click' , 'Doba dabová - iROZHLAS - tipovačka MS hokej 2021')" class="pull-left mt--20" href="https://dobadabova.cz/" target="_blank" title="Doba dabová"><img loading="lazy" src="https://www.irozhlas.cz/sites/default/files/uploader_unmanaged/screenshot-dobadabov_210512-115147_ace.png" alt="Doba Dabová" class="img" /></a>
-<p>&nbsp;</p>
+</wide>
