@@ -10,7 +10,7 @@ options: [noheader, nopic] #wide, noheader (, nopic)
 
 <p>Tipněte si s námi vítěze letošního <a href="https://www.irozhlas.cz/sport/ms-hokej/2021" target="_blank" title="Mistrovství světa v hokeji 2021">hokejového mistrovství</a>! Stačí vybrat týmy pro čtvrtfinále, semifinále, finále a boj o třetí místo. Vyplňte následujícího pavouka podle postupového klíče: vítězové skupiny se utkají se čtvrtými z protější skupiny, druzí se třetími. Výběr uložte a sdílejte s přáteli na Facebooku nebo Twitteru.</p>
 <p>Přidejte ke sdílenému příspěvku hashtag <strong>#irozhlas-tipovacka</strong> a prvních 10 nejpřesněji tipujících odměníme <a href="#ceny">cenami</a> ↓ po skončení šampionátu.</p>
-<p class="mb--30">Tipovat můžete do 26. května 23.59. Poslouchejte <a onclick="ga('gtm1.send', 'event', 'ondemand', 'click' , 'Radoižurnál sport - iROZHLAS - tipovačka MS hokej 2021');" href="https://radiozurnalsport.cz" target="_blank">nové sportovní rádio <img src="https://www.irozhlas.cz/sites/default/files/uploader_unmanaged/cro_radiozurnalsport_190502-100819_ace.png" alt="Radiožurnál Sport" style="width: 121px;"></a> už od pátku 21. května.</p>
+<p class="mb--30">Tipovat můžete do 26. května 23.59. Poslouchejte <a onclick="ga('gtm1.send', 'event', 'ondemand', 'click' , 'Radiožurnál sport - iROZHLAS - tipovačka MS hokej 2021');" href="https://radiozurnalsport.cz" target="_blank">nové sportovní rádio <img src="https://www.irozhlas.cz/sites/default/files/uploader_unmanaged/cro_radiozurnalsport_190502-100819_ace.png" alt="Radiožurnál Sport" style="width: 121px;"></a> už od pátku 21. května.</p>
 <wide>
   <div id="hokej"></div>
 <div id="ceny" class="row-main row-main--narrow mt--20">

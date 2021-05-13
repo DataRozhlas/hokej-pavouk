@@ -9,7 +9,6 @@ import Select, { components } from "react-select";
 import { ClipLoader } from "react-spinners";
 import smoothscroll from "smoothscroll-polyfill";
 import { codeToName, posToTeam } from "./helperFunctions";
-//import "./branding";
 
 smoothscroll.polyfill();
 const isDesktop = window.innerWidth > 600;
