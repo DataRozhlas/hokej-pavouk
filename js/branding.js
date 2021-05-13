@@ -14,4 +14,3 @@ brandingHolder.innerHTML = "Mistrovství světa v hokeji 2021";
 branding.appendChild(brandingHolder);
 var body = document.getElementsByTagName("body")[0];
 body.insertBefore(branding, body.firstChild);
-console.log("ůbrandingg");
