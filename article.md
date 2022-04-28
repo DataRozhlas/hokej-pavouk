@@ -1,4 +1,4 @@
-title: "Tipněte si vývoj a vítěze MS v hokeji 2021"
+title: "Máte rádi hokej? Tipněte si vývoj a vítěze mistrovství světa v hokeji 2022"
 perex: ""
 coverimg: https://interaktivni.rozhlas.cz/brexit/media/cover.jpg
 coverimg_note: "Foto <a href='#'>ČTK</a>"
@@ -18,7 +18,7 @@ options: [noheader, nopic] #wide, noheader (, nopic)
 <p class="clearfix">
 <img loading="lazy" src="https://www.irozhlas.cz/sites/default/files/uploader_unmanaged/tipovacka-ceny-1_210512-114154_ace.png" width="240" class="pull-left hide--m">
 <img loading="lazy" src="https://www.irozhlas.cz/sites/default/files/uploader_unmanaged/tipovacka-ceny-1_210512-114154_ace.png" width="240" class="pull-left img hide--d hide--t">
-<strong>1. Hama digitální a internetové rádio</strong><br>Digitální DAB+ a internetové rádio. Dálkové ovládání. 
+<strong>1. Hama digitální a internetové rádio</strong><br>Digitální DAB+ a internetové rádio. Dálkové ovládání.
 </p>
 <p class="clearfix">
 <img loading="lazy" src="https://www.irozhlas.cz/sites/default/files/uploader_unmanaged/tipovacka-ceny-2-3_210512-114154_ace.png" width="240" class="pull-left hide--m">
@@ -35,9 +35,9 @@ options: [noheader, nopic] #wide, noheader (, nopic)
 <img loading="lazy" src="https://www.irozhlas.cz/sites/default/files/styles/zpravy_otvirak_velky/public/uploader/irozhlas_5_190322-115911_mda.jpg?itok=lSBPchh-" width="240" class="pull-left img hide--d hide--t">
 <strong>4.-10. ceny útěchy</strong><br>Hrnky, tašky, ponožky a další užitečné drobnosti, které vám udělají radost.</p>
 </p>
-<p class="text-sans-serif text-sm">MS Hokej 2021: <a title="Zprávy z mistrovství světa v hokeji 2021" href="https://www.irozhlas.cz/sport/ms-hokej/2021">Zprávy</a> &bull; <a title="Program mistrovství světa v hokeji 2021" href="https://www.irozhlas.cz/sport/ms-hokej/2021/program">Program</a> &bull; <a title="Tabulky mistrovství světa v hokeji 2021" href="https://www.irozhlas.cz/sport/ms-hokej/2021/tabulky">Tabulky</a></p>              
+<p class="text-sans-serif text-sm">MS Hokej 2021: <a title="Zprávy z mistrovství světa v hokeji 2021" href="https://www.irozhlas.cz/sport/ms-hokej/2021">Zprávy</a> &bull; <a title="Program mistrovství světa v hokeji 2021" href="https://www.irozhlas.cz/sport/ms-hokej/2021/program">Program</a> &bull; <a title="Tabulky mistrovství světa v hokeji 2021" href="https://www.irozhlas.cz/sport/ms-hokej/2021/tabulky">Tabulky</a></p>
 <h2 class="mt--20 mb--10">Jak získat cenu?</h2>
-<p>Ceny získává 10 nejpřesnějších tipů seřazených dle data zveřejnění a publikované s hashtagem <strong>#irozhlas-tipovacka</strong> na sociálních sítích Facebook nebo Twitter. Tipovat je možné do půlnoci 26. května 2021. Od každého tipujícího bude zařazen pouze první zveřejněný tip. Výsledky tipovačky zveřejníme po skončení šampionátu v červnu 2021 na serveru iROZHLAS.    
+<p>Ceny získává 10 nejpřesnějších tipů seřazených dle data zveřejnění a publikované s hashtagem <strong>#irozhlas-tipovacka</strong> na sociálních sítích Facebook nebo Twitter. Tipovat je možné do půlnoci 26. května 2021. Od každého tipujícího bude zařazen pouze první zveřejněný tip. Výsledky tipovačky zveřejníme po skončení šampionátu v červnu 2021 na serveru iROZHLAS.
 </p>
 </p>
 <a onclick="ga('gtm1.send', 'event', 'ondemand', 'click' , 'Doba dabová - iROZHLAS - tipovačka MS hokej 2021')" class="pull-left mt--20" href="https://dobadabova.cz/" target="_blank" title="Doba dabová"><img loading="lazy" src="https://www.irozhlas.cz/sites/default/files/uploader_unmanaged/screenshot-dobadabov_210512-115147_ace.png" alt="Doba Dabová" class="img" /></a>
