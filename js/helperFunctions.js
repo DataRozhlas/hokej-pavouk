@@ -25,13 +25,17 @@ export function codeToName(code) {
     case "no":
       return "Norsko";
     case "ru":
-      return "Rusko";
+      return "Ruští sportovci";
     case "se":
       return "Švédsko";
     case "sk":
       return "Slovensko";
     case "us":
       return "USA";
+    case "by":
+      return "Bělorusko";
+    case "kz":
+      return "Kazachstán";
     default:
       return code;
   }

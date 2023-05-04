@@ -17,7 +17,8 @@ const isDesktop = window.innerWidth > 600;
 function scrollSelect(e) {
   if (!isDesktop) {
     const container = document.getElementById("hokej-container");
-    const elementOffset = e.target.parentElement.parentElement.parentElement.offsetLeft;
+    const elementOffset =
+      e.target.parentElement.parentElement.parentElement.offsetLeft;
     container.scroll({ left: elementOffset - 81, behavior: "smooth" });
     container.scroll({ left: elementOffset - 80, behavior: "smooth" });
   }
@@ -59,18 +60,27 @@ const QuarterSelect = ({
   selection,
   disabled,
 }) => {
-  const options = quarterPool.map(el => (selection.includes(el)
-    ? { value: el, isDisabled: true, label: codeToName(el) }
-    : { value: el, isDisabled: false, label: codeToName(el) })).sort((a, b) => a.isDisabled - b.isDisabled);
+  const options = quarterPool
+    .map((el) =>
+      selection.includes(el)
+        ? { value: el, isDisabled: true, label: codeToName(el) }
+        : { value: el, isDisabled: false, label: codeToName(el) }
+    )
+    .sort((a, b) => a.isDisabled - b.isDisabled);
   return (
     <Select
       options={options}
       className={`hokej-select hokej-select-${position}`}
-      value={selection[position] !== 0
-        ? { value: selection[position], label: codeToName(selection[position]) }
-        : 0}
-      onChange={val => handler(val.value, position)}
-      onFocus={e => scrollSelect(e)}
+      value={
+        selection[position] !== 0
+          ? {
+              value: selection[position],
+              label: codeToName(selection[position]),
+            }
+          : 0
+      }
+      onChange={(val) => handler(val.value, position)}
+      onFocus={(e) => scrollSelect(e)}
       placeholder={`-- vyberte tým ${posToTeam(position)} --`}
       isSearchable={false}
       isDisabled={disabled && true}
@@ -89,50 +99,62 @@ const FilterSelect = ({
 }) => {
   const options = selection
     .slice(pickStart, pickStart + 2)
-    .filter(el => el !== 0)
-    .map(el => ({ value: el, label: codeToName(el) }));
+    .filter((el) => el !== 0)
+    .map((el) => ({ value: el, label: codeToName(el) }));
 
   return (
     <Select
       options={options}
       className={`hokej-select hokej-select-${position}`}
-      value={selection[position] !== 0
-        ? { value: selection[position], label: codeToName(selection[position]) }
-        : 0}
-      onChange={val => handler(val.value, position)}
-      onFocus={e => scrollSelect(e)}
+      value={
+        selection[position] !== 0
+          ? {
+              value: selection[position],
+              label: codeToName(selection[position]),
+            }
+          : 0
+      }
+      onChange={(val) => handler(val.value, position)}
+      onFocus={(e) => scrollSelect(e)}
       placeholder="-- vyberte tým --"
       isSearchable={false}
-      isDisabled={selection.slice(pickStart, pickStart + 2).every(el => el !== 0) && !disabled ? null : true}
+      isDisabled={
+        selection.slice(pickStart, pickStart + 2).every((el) => el !== 0) &&
+        !disabled
+          ? null
+          : true
+      }
       components={{ SingleValue, Option }}
       styles={customStyles}
     />
   );
 };
 
-const ThirdPlaceSelect = ({
-  handler,
-  selection,
-  disabled,
-}) => {
+const ThirdPlaceSelect = ({ handler, selection, disabled }) => {
   const options = selection
     .slice(8, 12)
-    .filter(el => !selection.slice(12, 14).includes(el))
-    .filter(el => el !== 0)
-    .map(el => ({ value: el, label: codeToName(el) }));
+    .filter((el) => !selection.slice(12, 14).includes(el))
+    .filter((el) => el !== 0)
+    .map((el) => ({ value: el, label: codeToName(el) }));
 
   return (
     <Select
       options={options}
       className="hokej-select hokej-select-15"
-      value={selection[15] !== 0
-        ? { value: selection[15], label: codeToName(selection[15]) }
-        : 0}
-      onChange={val => handler(val.value, 15, true)}
-      onFocus={e => scrollSelect(e)}
+      value={
+        selection[15] !== 0
+          ? { value: selection[15], label: codeToName(selection[15]) }
+          : 0
+      }
+      onChange={(val) => handler(val.value, 15, true)}
+      onFocus={(e) => scrollSelect(e)}
       placeholder="-- vyberte tým --"
       isSearchable={false}
-      isDisabled={selection.slice(12, 14).every(el => el !== 0) && !disabled ? null : true}
+      isDisabled={
+        selection.slice(12, 14).every((el) => el !== 0) && !disabled
+          ? null
+          : true
+      }
       components={{ SingleValue, Option }}
       styles={customStyles}
     />
@@ -142,17 +164,19 @@ const ThirdPlaceSelect = ({
 const DummySelect = ({ selection, team }) => {
   const options = selection
     .slice(8, 12)
-    .filter(el => !selection.slice(12, 14).includes(el))
-    .filter(el => el !== 0)
-    .map(el => ({ value: el, label: codeToName(el) }));
+    .filter((el) => !selection.slice(12, 14).includes(el))
+    .filter((el) => el !== 0)
+    .map((el) => ({ value: el, label: codeToName(el) }));
 
   return (
     <Select
       options={options}
       className={`hokej-select hokej-select-dummy-${team}`}
-      value={options.length === 2 && selection.slice(12, 14).every(el => el !== 0)
-        ? options[team]
-        : 0}
+      value={
+        options.length === 2 && selection.slice(12, 14).every((el) => el !== 0)
+          ? options[team]
+          : 0
+      }
       placeholder="-- vyberte finalisty --"
       isDisabled
       components={{ SingleValue, Option }}
@@ -180,8 +204,8 @@ class HokejApp extends Component {
     this.state = {
       selection: new Array(17).fill(0),
       quarterPool: {
-        1: ["ca", "us", "fi", "de", "sk", "dk", "fr", "gb"],
-        2: ["se", "ru", "cz", "ch", "no", "lv", "at", "it"],
+        1: ["dk", "fr", "it", "ca", "kz", "de", "sk", "ch"],
+        2: ["cz", "fi", "lv", "no", "at", "se", "us", "gb"],
       },
       shareLink: undefined,
       loading: false,
@@ -197,8 +221,25 @@ class HokejApp extends Component {
   componentDidMount() {
     if (window.location.href.includes("test")) {
       this.setState({
-        selection: ["dk", "at", "fi", "ch", "fr", "cz", "ca", "it",
-          "dk", "fi", "fr", "ca", "dk", "fr", "dk", "fi", "ca"],
+        selection: [
+          "dk",
+          "at",
+          "fi",
+          "ch",
+          "fr",
+          "cz",
+          "ca",
+          "it",
+          "dk",
+          "fi",
+          "fr",
+          "ca",
+          "dk",
+          "fr",
+          "dk",
+          "fi",
+          "ca",
+        ],
       });
     }
   }
@@ -223,7 +264,12 @@ class HokejApp extends Component {
     }
 
     // eslint-disable-next-line prefer-destructuring
-    if (thirdPlace) selection[16] = selection.slice(8, 12).filter(el => !selection.slice(12, 14).includes(el) && selection[15] !== el)[0];
+    if (thirdPlace)
+      selection[16] = selection
+        .slice(8, 12)
+        .filter(
+          (el) => !selection.slice(12, 14).includes(el) && selection[15] !== el
+        )[0];
     this.setState({ selection, quarterPool });
   }
 
@@ -234,11 +280,17 @@ class HokejApp extends Component {
     const correctedSelection = selection.slice(0, 14);
     correctedSelection.push(selection[15], selection[16], selection[14], "()");
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://jq0d6e5rs6.execute-api.eu-west-1.amazonaws.com/prod");
+    xhr.open(
+      "POST",
+      "https://jq0d6e5rs6.execute-api.eu-west-1.amazonaws.com/prod"
+    );
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = () => {
       if (xhr.status === 200) {
-        if (!isDesktop) document.getElementById("submit").scrollIntoView({ behavior: "smooth", block: "end" });
+        if (!isDesktop)
+          document
+            .getElementById("submit")
+            .scrollIntoView({ behavior: "smooth", block: "end" });
         this.setState({
           shareLink: JSON.parse(xhr.responseText),
           loading: false,
@@ -254,87 +306,268 @@ class HokejApp extends Component {
 
   FbShare() {
     const { shareLink } = this.state;
-    window.open(`${`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`}`, "Sdílení", "width=550,height=450,scrollbars=no");
+    window.open(
+      `${`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`}`,
+      "Sdílení",
+      "width=550,height=450,scrollbars=no"
+    );
   }
 
   TwShare() {
     const { shareLink } = this.state;
-    window.open(`${`https://twitter.com/share?url=${shareLink}`}`, "Sdílení", "width=550,height=450,scrollbars=no");
+    window.open(
+      `${`https://twitter.com/share?url=${shareLink}`}`,
+      "Sdílení",
+      "width=550,height=450,scrollbars=no"
+    );
   }
 
   render() {
-    const {
-      quarterPool, selection, shareLink, loading,
-    } = this.state;
+    const { quarterPool, selection, shareLink, loading } = this.state;
     return (
       <div>
         <div id="hokej-container">
           <span className="hokej-desc-q">Čtvrtfinále</span>
-          <QuarterSelect handler={this.handleSelection} position={0} quarterPool={quarterPool[1]} selection={selection} disabled={shareLink} />
-          <QuarterSelect handler={this.handleSelection} position={1} quarterPool={quarterPool[2]} selection={selection} disabled={shareLink} />
-          <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket1.png" className="hokej-bracket-1" alt="" />
-          <QuarterSelect handler={this.handleSelection} position={2} quarterPool={quarterPool[2]} selection={selection} disabled={shareLink} />
-          <QuarterSelect handler={this.handleSelection} position={3} quarterPool={quarterPool[1]} selection={selection} disabled={shareLink} />
+          <QuarterSelect
+            handler={this.handleSelection}
+            position={0}
+            quarterPool={quarterPool[1]}
+            selection={selection}
+            disabled={shareLink}
+          />
+          <QuarterSelect
+            handler={this.handleSelection}
+            position={1}
+            quarterPool={quarterPool[2]}
+            selection={selection}
+            disabled={shareLink}
+          />
+          <img
+            src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket1.png"
+            className="hokej-bracket-1"
+            alt=""
+          />
+          <QuarterSelect
+            handler={this.handleSelection}
+            position={2}
+            quarterPool={quarterPool[2]}
+            selection={selection}
+            disabled={shareLink}
+          />
+          <QuarterSelect
+            handler={this.handleSelection}
+            position={3}
+            quarterPool={quarterPool[1]}
+            selection={selection}
+            disabled={shareLink}
+          />
 
-          <QuarterSelect handler={this.handleSelection} position={4} quarterPool={quarterPool[2]} selection={selection} disabled={shareLink} />
-          <QuarterSelect handler={this.handleSelection} position={5} quarterPool={quarterPool[1]} selection={selection} disabled={shareLink} />
-          <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket1.png" className="hokej-bracket-2" alt="" />
-          <QuarterSelect handler={this.handleSelection} position={6} quarterPool={quarterPool[1]} selection={selection} disabled={shareLink} />
-          <QuarterSelect handler={this.handleSelection} position={7} quarterPool={quarterPool[2]} selection={selection} disabled={shareLink} />
+          <QuarterSelect
+            handler={this.handleSelection}
+            position={4}
+            quarterPool={quarterPool[2]}
+            selection={selection}
+            disabled={shareLink}
+          />
+          <QuarterSelect
+            handler={this.handleSelection}
+            position={5}
+            quarterPool={quarterPool[1]}
+            selection={selection}
+            disabled={shareLink}
+          />
+          <img
+            src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket1.png"
+            className="hokej-bracket-2"
+            alt=""
+          />
+          <QuarterSelect
+            handler={this.handleSelection}
+            position={6}
+            quarterPool={quarterPool[1]}
+            selection={selection}
+            disabled={shareLink}
+          />
+          <QuarterSelect
+            handler={this.handleSelection}
+            position={7}
+            quarterPool={quarterPool[2]}
+            selection={selection}
+            disabled={shareLink}
+          />
 
           <span className="hokej-desc-s">Semifinále</span>
-          <FilterSelect handler={this.handleSelection} position={8} pickStart={0} selection={selection} disabled={shareLink} />
-          <FilterSelect handler={this.handleSelection} position={9} pickStart={2} selection={selection} disabled={shareLink} />
-          <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket2.png" className="hokej-bracket-3" alt="" />
-          <FilterSelect handler={this.handleSelection} position={10} pickStart={4} selection={selection} disabled={shareLink} />
-          <FilterSelect handler={this.handleSelection} position={11} pickStart={6} selection={selection} disabled={shareLink} />
+          <FilterSelect
+            handler={this.handleSelection}
+            position={8}
+            pickStart={0}
+            selection={selection}
+            disabled={shareLink}
+          />
+          <FilterSelect
+            handler={this.handleSelection}
+            position={9}
+            pickStart={2}
+            selection={selection}
+            disabled={shareLink}
+          />
+          <img
+            src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket2.png"
+            className="hokej-bracket-3"
+            alt=""
+          />
+          <FilterSelect
+            handler={this.handleSelection}
+            position={10}
+            pickStart={4}
+            selection={selection}
+            disabled={shareLink}
+          />
+          <FilterSelect
+            handler={this.handleSelection}
+            position={11}
+            pickStart={6}
+            selection={selection}
+            disabled={shareLink}
+          />
 
           <span className="hokej-desc-f">Finále</span>
-          <FilterSelect handler={this.handleSelection} position={12} pickStart={8} selection={selection} disabled={shareLink} />
-          <FilterSelect handler={this.handleSelection} position={13} pickStart={10} selection={selection} disabled={shareLink} />
+          <FilterSelect
+            handler={this.handleSelection}
+            position={12}
+            pickStart={8}
+            selection={selection}
+            disabled={shareLink}
+          />
+          <FilterSelect
+            handler={this.handleSelection}
+            position={13}
+            pickStart={10}
+            selection={selection}
+            disabled={shareLink}
+          />
 
-          <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket3.png" className="hokej-bracket-4" alt="" />
-          <span className="hokej-desc-w">Mistr světa 2019</span>
-          <FilterSelect handler={this.handleSelection} position={14} pickStart={12} selection={selection} disabled={shareLink} />
+          <img
+            src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket3.png"
+            className="hokej-bracket-4"
+            alt=""
+          />
+          <span className="hokej-desc-w">Mistr světa 2022</span>
+          <FilterSelect
+            handler={this.handleSelection}
+            position={14}
+            pickStart={12}
+            selection={selection}
+            disabled={shareLink}
+          />
 
           <span className="hokej-desc-t">Třetí místo</span>
           <DummySelect selection={selection} team={0} />
           <DummySelect selection={selection} team={1} />
-          <img src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket3.png" className="hokej-bracket-5" alt="" />
-          <ThirdPlaceSelect handler={this.handleSelection} selection={selection} disabled={shareLink} />
+          <img
+            src="https://data.irozhlas.cz/hokej-pavouk/assets/bracket3.png"
+            className="hokej-bracket-5"
+            alt=""
+          />
+          <ThirdPlaceSelect
+            handler={this.handleSelection}
+            selection={selection}
+            disabled={shareLink}
+          />
         </div>
         <div id="submit">
-          {!shareLink
-            ? (
-              <span>
-                <button className="btn btn-primary" type="submit" disabled={selection.every(el => el !== 0) ? null : true} onClick={this.sendForm}>
-                  {!loading && "Uložit tip"}
-                  <ClipLoader
-                    sizeUnit="px"
-                    size={20}
-                    color="#ffffff"
-                    loading={loading}
-                  />
+          {!shareLink ? (
+            <span>
+              <button
+                className="btn btn-primary"
+                type="submit"
+                disabled={selection.every((el) => el !== 0) ? null : true}
+                onClick={this.sendForm}
+              >
+                {!loading && "Uložit tip"}
+                <ClipLoader
+                  sizeUnit="px"
+                  size={20}
+                  color="#ffffff"
+                  loading={loading}
+                />
+              </button>
+              <button
+                className="btn btn-primary"
+                id="btn-reset"
+                onClick={this.resetForm}
+                type="button"
+              >
+                Resetovat
+              </button>
+            </span>
+          ) : (
+            <div className="btn btn-green">Tip uložen!</div>
+          )}
+          {isDesktop ? (
+            <span>
+              <button
+                className="btn btn-primary"
+                type="submit"
+                onClick={this.FbShare}
+                disabled={shareLink ? null : true}
+              >
+                Sdílet na Facebooku
+              </button>
+              <button
+                className="btn btn-primary"
+                type="submit"
+                onClick={this.TwShare}
+                disabled={shareLink ? null : true}
+              >
+                Sdílet na Twitteru
+              </button>
+            </span>
+          ) : (
+            <span>
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button
+                  className="btn btn-primary"
+                  type="submit"
+                  disabled={shareLink ? null : true}
+                >
+                  Sdílet na Facebooku
                 </button>
-                <button className="btn btn-primary" id="btn-reset" onClick={this.resetForm} type="button">Resetovat</button>
-              </span>
-            ) : (
-              <div className="btn btn-green">Tip uložen!</div>
-            )}
-          {isDesktop
-            ? (
-              <span>
-                <button className="btn btn-primary" type="submit" onClick={this.FbShare} disabled={shareLink ? null : true}>Sdílet na Facebooku</button>
-                <button className="btn btn-primary" type="submit" onClick={this.TwShare} disabled={shareLink ? null : true}>Sdílet na Twitteru</button>
-              </span>
-            )
-            : (
-              <span>
-                <a href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`} target="_blank" rel="noopener noreferrer"><button className="btn btn-primary" type="submit" disabled={shareLink ? null : true}>Sdílet na Facebooku</button></a>
-                <a href={`https://twitter.com/share?url=${shareLink}`} target="_blank" rel="noopener noreferrer"><button className="btn btn-primary" type="submit" disabled={shareLink ? null : true}>Sdílet na Twitteru</button></a>
-              </span>
-            )}
-          <a href={shareLink ? `${shareLink.substring(0, shareLink.length - 4)}png` : null}><button className="btn btn-primary" type="button" disabled={shareLink ? null : true}>Stáhnout tip</button></a>
+              </a>
+              <a
+                href={`https://twitter.com/share?url=${shareLink}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button
+                  className="btn btn-primary"
+                  type="submit"
+                  disabled={shareLink ? null : true}
+                >
+                  Sdílet na Twitteru
+                </button>
+              </a>
+            </span>
+          )}
+          <a
+            href={
+              shareLink
+                ? `${shareLink.substring(0, shareLink.length - 4)}png`
+                : null
+            }
+          >
+            <button
+              className="btn btn-primary"
+              type="button"
+              disabled={shareLink ? null : true}
+            >
+              Stáhnout tip
+            </button>
+          </a>
         </div>
       </div>
     );

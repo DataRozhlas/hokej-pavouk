@@ -17,7 +17,7 @@ function uvozovky(text) {
   let isTag = false;
   let uvozovkyCount = 0;
   let outText = "";
-  const srcText = text.replace(/&quot;/g, "\"");
+  const srcText = text.replace(/&quot;/g, '"');
   [...srcText].forEach((letter) => {
     switch (letter) {
       case "„":
@@ -25,7 +25,7 @@ function uvozovky(text) {
         uvozovkyCount += 1;
         outText += letter;
         break;
-      case "\"":
+      case '"':
         if (!isTag) {
           outText += uvozovkyCount % 2 ? "“" : "„";
           uvozovkyCount += 1;
@@ -60,10 +60,14 @@ const build = async (mode) => {
 
   header.libraries.forEach((library) => {
     if (library === "datatables") {
-      libLinks += "<script src=\"https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js\"></script>\n";
-      libLinks += "<script src=\"https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js\"></script>\n";
-      styleLinks += "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css\">\n";
-      styleLinks += "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css\">\n";
+      libLinks +=
+        '<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>\n';
+      libLinks +=
+        '<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>\n';
+      styleLinks +=
+        '<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">\n';
+      styleLinks +=
+        '<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">\n';
     } else if (library in libraryPresets) {
       libLinks += `<script src="${libraryPresets[library]}"></script>\n`;
     } else {
@@ -87,17 +91,29 @@ const build = async (mode) => {
   header.styles += `<style>${new CleanCSS().minify(styleInput).styles}</style>`;
 
   // replacing pseudotags in the body
-  body = body.replace(new RegExp("<wide>", "g"), "</div><div class=\"row-main row-main--article\">");
-  body = body.replace(new RegExp("</wide>", "g"), "</div><div class=\"row-main row-main--narrow\">");
+  body = body.replace(
+    new RegExp("<wide>", "g"),
+    '</div><div class="row-main row-main--article">'
+  );
+  body = body.replace(
+    new RegExp("</wide>", "g"),
+    '</div><div class="row-main row-main--narrow">'
+  );
 
-  body = body.replace(new RegExp("<left>", "g"), "<div class=\"b-inline b-inline--left\"><div class=\"b-inline__wrap\"><div class=\"b-inline__content\"><div class=\"text-sm\">");
+  body = body.replace(
+    new RegExp("<left>", "g"),
+    '<div class="b-inline b-inline--left"><div class="b-inline__wrap"><div class="b-inline__content"><div class="text-sm">'
+  );
   body = body.replace(new RegExp("</left>", "g"), "</div></div></div></div>");
 
-  body = body.replace(new RegExp("<right>", "g"), "<div class=\"b-inline b-inline--right\"><div class=\"b-inline__wrap\"><div class=\"b-inline__content\"><div class=\"text-sm\">");
+  body = body.replace(
+    new RegExp("<right>", "g"),
+    '<div class="b-inline b-inline--right"><div class="b-inline__wrap"><div class="b-inline__content"><div class="text-sm">'
+  );
   body = body.replace(new RegExp("</right>", "g"), "</div></div></div></div>");
 
   // applying markdown to the body
-  body = md(body);
+  body = md.parse(body);
   body = uvozovky(body);
 
   header.content = body;
@@ -120,14 +136,17 @@ const build = async (mode) => {
 
   // the wide option
   if (header.options.includes("wide")) {
-    header.column = "<div class=\"row-main row-main--article\">";
+    header.column = '<div class="row-main row-main--article">';
   } else {
-    header.column = "<div class=\"row-main row-main--narrow\">";
+    header.column = '<div class="row-main row-main--narrow">';
   }
 
   // filling the template
   template.match(/{(.*?)}/g).forEach((variable) => {
-    template = template.replace(variable, header[variable.substring(1, variable.length - 1)]);
+    template = template.replace(
+      variable,
+      header[variable.substring(1, variable.length - 1)]
+    );
   });
 
   // webpacking
@@ -135,7 +154,10 @@ const build = async (mode) => {
 
   const promise = new Promise((resolve) => {
     compiler.run((err, stats) => {
-      const message = (stats.compilation.errors.length > 0) ? `Chyba!\n${stats.compilation.errors}` : "Zabaleno...";
+      const message =
+        stats.compilation.errors.length > 0
+          ? `Chyba!\n${stats.compilation.errors}`
+          : "Zabaleno...";
       process.stdout.write(message);
       resolve(fs.readFileSync("output.js", "utf8"));
     });
@@ -176,9 +198,13 @@ async function main() {
   } else if (process.argv[2] === "build") {
     process.stdout.write("Buildování... ");
     const built = await build("production");
-    process.stdout.write(`\n${built} Zkopírujte obsah output.html do redakčního systému.`);
+    process.stdout.write(
+      `\n${built} Zkopírujte obsah output.html do redakčního systému.`
+    );
   } else {
-    process.stdout.write("Build spusťte přes npm run watch (sledování) / npm run build");
+    process.stdout.write(
+      "Build spusťte přes npm run watch (sledování) / npm run build"
+    );
   }
 }
 
