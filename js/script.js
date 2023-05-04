@@ -204,8 +204,8 @@ class HokejApp extends Component {
     this.state = {
       selection: new Array(17).fill(0),
       quarterPool: {
-        1: ["dk", "fr", "it", "ca", "kz", "de", "sk", "ch"],
-        2: ["cz", "fi", "lv", "no", "at", "se", "us", "gb"],
+        1: ["fi", "se", "us", "de", "dk", "fr", "at", "hu"],
+        2: ["ca", "cz", "ch", "sk", "lv", "no", "kz", "si"],
       },
       shareLink: undefined,
       loading: false,
@@ -452,7 +452,7 @@ class HokejApp extends Component {
             className="hokej-bracket-4"
             alt=""
           />
-          <span className="hokej-desc-w">Mistr světa 2022</span>
+          <span className="hokej-desc-w">Mistr světa 2023</span>
           <FilterSelect
             handler={this.handleSelection}
             position={14}

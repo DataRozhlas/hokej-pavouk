@@ -36,6 +36,10 @@ export function codeToName(code) {
       return "Bělorusko";
     case "kz":
       return "Kazachstán";
+    case "hu":
+      return "Maďarsko";
+    case "si":
+      return "Slovinsko";
     default:
       return code;
   }

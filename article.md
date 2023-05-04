@@ -1,4 +1,4 @@
-title: "Máte rádi hokej? Tipněte si vývoj a vítěze mistrovství světa v hokeji 2022"
+title: "Máte rádi hokej? Tipněte si vývoj a vítěze mistrovství světa v hokeji 2023"
 perex: ""
 coverimg: https://interaktivni.rozhlas.cz/brexit/media/cover.jpg
 coverimg_note: "Foto <a href='#'>ČTK</a>"
