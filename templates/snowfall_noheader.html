@@ -9,16 +9,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
 var branding = document.createElement("div");
 branding.className = "branding";
 var brandingHolder = document.createElement("a");
-brandingHolder.href = "https://www.irozhlas.cz/sport/ms-hokej/2022";
+brandingHolder.href = "https://www.irozhlas.cz/sport/ms-hokej/2023";
 brandingHolder.className = "branding__holder";
 brandingHolder.onclick =
-  "ga('gtm1.send', 'event', 'ondemand', 'click' , 'MS hokej 202@  - branding');";
-brandingHolder.innerHTML = "Mistrovství světa v hokeji 202@";
+  "ga('gtm1.send', 'event', 'ondemand', 'click' , 'MS hokej 2023 - branding');";
+brandingHolder.innerHTML = "Mistrovství světa v hokeji 2023";
 branding.appendChild(brandingHolder);
 var body = document.getElementsByTagName("body")[0];
 body.insertBefore(branding, body.firstChild);
-
   // branding konec
+
+  // logo analytics
+  const logo = document.querySelector(".header__logo");
+  logo.addEventListener("click", function () {
+    ga("gtm1.send", "event", "ondemand", "click", "MS hokej 2023 - logo");
+  });
+
 </script>
 {styles}
 <div class="row-main row-main--article">

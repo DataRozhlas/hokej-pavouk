@@ -222,23 +222,23 @@ class HokejApp extends Component {
     if (window.location.href.includes("test")) {
       this.setState({
         selection: [
-          "dk",
+          "hu",
           "at",
           "fi",
           "ch",
           "fr",
           "cz",
-          "ca",
-          "it",
-          "dk",
+          "si",
+          "sk",
+          "hu",
           "fi",
           "fr",
-          "ca",
-          "dk",
+          "si",
+          "hu",
           "fr",
-          "dk",
+          "hu",
           "fi",
-          "ca",
+          "si",
         ],
       });
     }
@@ -278,11 +278,11 @@ class HokejApp extends Component {
     this.setState({ loading: true });
     // voheky
     const correctedSelection = selection.slice(0, 14);
-    correctedSelection.push(selection[15], selection[16], selection[14], "()");
+    correctedSelection.push(selection[15], selection[16], selection[14]);
     const xhr = new XMLHttpRequest();
     xhr.open(
       "POST",
-      "https://jq0d6e5rs6.execute-api.eu-west-1.amazonaws.com/prod"
+      "https://sf5efxokffwv2tzvvdtrckt4cy0qksuf.lambda-url.eu-central-1.on.aws/"
     );
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = () => {
@@ -292,7 +292,7 @@ class HokejApp extends Component {
             .getElementById("submit")
             .scrollIntoView({ behavior: "smooth", block: "end" });
         this.setState({
-          shareLink: JSON.parse(xhr.responseText),
+          shareLink: xhr.responseText,
           loading: false,
         });
       }
