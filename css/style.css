@@ -5,9 +5,9 @@
     margin: 0 auto;
   }
   .branding__holder {
-    background-color: #df2b0e;
-    background: url("https://www.irozhlas.cz/sites/default/files/uploader_unmanaged/branding_230507-123219_pek.png")
-      50% 0 no-repeat fixed;
+    background-color: #fff;
+    /* background: url("https://www.irozhlas.cz/sites/default/files/uploader_unmanaged/branding_230507-123219_pek.png")
+      50% 0 no-repeat fixed; */
   }
   .page-header-branding .header .header__top {
     padding-top: 7px;
@@ -20,17 +20,6 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.hokejFlex {
-  display: flex;
-  overflow-x: scroll;
-  width: 100%;
-  justify-content: space-around;
-}
-
-.hokejFlex > div {
-  width: 200px;
-}
-
 #hokej-container {
   position: relative;
   height: 450px;
@@ -40,14 +29,6 @@
   position: relative;
 }
 
-@media only screen and (max-width: 975px) {
-  #hokej-container {
-    overflow-x: scroll;
-    height: 750px;
-    padding-bottom: 250px;
-    margin-bottom: -250px;
-  }
-}
 
 #hokej-container > * {
   position: absolute;
@@ -164,6 +145,7 @@
   top: -25px;
   font-weight: bold;
   font-variant: small-caps;
+  white-space: nowrap;
 }
 
 .hokej-select-14 {
@@ -176,6 +158,7 @@
   top: 283px;
   font-weight: bold;
   font-variant: small-caps;
+  white-space: nowrap;
 }
 
 .hokej-select-15 {
@@ -205,6 +188,17 @@ input:invalid {
 .flag {
   padding-right: 5px;
 }
+
+
+@media only screen and (max-width: 975px) {
+  #hokej-container {
+    overflow-x: scroll;
+  }
+  .hokej-desc-s, .hokej-desc-f, .hokej-desc-w {
+    top: 0px;
+  }
+}
+
 
 /* based on bootstrap buttons */
 

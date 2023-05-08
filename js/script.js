@@ -325,7 +325,7 @@ class HokejApp extends Component {
   render() {
     const { quarterPool, selection, shareLink, loading } = this.state;
     return (
-      <div>
+      <>
         <div id="hokej-container">
           <span className="hokej-desc-q">Čtvrtfinále</span>
           <QuarterSelect
@@ -569,7 +569,7 @@ class HokejApp extends Component {
             </button>
           </a>
         </div>
-      </div>
+      </>
     );
   }
 }
