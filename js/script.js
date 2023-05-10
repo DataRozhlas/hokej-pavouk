@@ -47,6 +47,12 @@ const Option = ({ children, data, ...props }) => (
 );
 
 const customStyles = {
+  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    return {
+      ...styles,
+      color: isDisabled ? "#CCCCCC" : "black",
+    };
+  },
   dropdownIndicator: (provided, { isDisabled }) => ({
     ...provided,
     color: isDisabled ? "#CCCCCC" : "black",

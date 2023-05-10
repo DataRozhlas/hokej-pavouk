@@ -6,15 +6,14 @@
   }
   .branding__holder {
     background-color: #fff;
-    /* background: url("https://www.irozhlas.cz/sites/default/files/uploader_unmanaged/branding_230507-123219_pek.png")
-      50% 0 no-repeat fixed; */
+     background: url("https://www.irozhlas.cz/sites/default/files/uploader_unmanaged/ms23_branding-1066px_230510-121217_pek.jpg")
+      50% 0 no-repeat fixed;
   }
   .page-header-branding .header .header__top {
     padding-top: 7px;
   }
 }
 /* main */
-
 #hokej {
   padding-top: 30px;
   font-family: Arial, Helvetica, sans-serif;
